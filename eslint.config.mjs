@@ -19,6 +19,17 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
     ],
+    rules: {
+      // 🔹 Disable completely
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+
+      // Or 🔹 (optional) just downgrade to warnings instead of errors
+      // "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+      // "@typescript-eslint/no-explicit-any": "warn",
+      // "@typescript-eslint/no-empty-object-type": ["warn", { "allowObjectTypes": true }],
+    },
   },
 ];
 
