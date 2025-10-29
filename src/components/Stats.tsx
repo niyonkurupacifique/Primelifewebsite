@@ -20,15 +20,15 @@ const Stats = () => {
   const [counters, setCounters] = useState({
     PoliciesRecorded: numberOfPoliciesRecorded === 0 ? <div className="loader"></div> : numberOfPoliciesRecorded,
     ClaimsSettled: numberOfClaimsRecorded === 0 ? <div className="loader"></div> : numberOfClaimsRecorded,
-    customersSatisfaction: 0,
-    TurnAroundTime: 0
+    customersSatisfaction: 92,
+    TurnAroundTime: 1
   })
 
   console.log("numberOfPoliciesRecorded", numberOfPoliciesRecorded)
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get<Statistics>('https://apps.prime.rw/customerbackendtest/api/statistics/counts');
+      const response = await axios.get<Statistics>('https://apps.prime.rw/customerbackend/api/statistics/counts');
       console.log("response we have is", response)
 
       // Only update if the values have actually changed
@@ -55,10 +55,10 @@ const Stats = () => {
   }, []);
 
   const statsData = [
-    { id: 1, number: numberOfPoliciesRecorded == 0 ? <span className="loader"></span> : numberOfPoliciesRecorded, suffix: '', label: 'Policies are recorded', target: numberOfPoliciesRecorded },
-    { id: 2, number: numberOfClaimsRecorded === 0 ? <span className="loader"></span> : numberOfClaimsRecorded, suffix: '', label: 'Claims are settled', target: numberOfClaimsRecorded }, // Fixed this line
-    { id: 3, number: 82.88, suffix: '%', label: 'Customer satisfaction rate', target: 82.88 },
-    { id: 4, number: 99.89, suffix: '%', label: 'turnaround time ', target: 99.89 }
+    { id: 1, number: numberOfPoliciesRecorded == 0 ? <span className="loader"></span> : numberOfPoliciesRecorded, suffix: '', label: 'Active Policies', target: numberOfPoliciesRecorded },
+    { id: 2, number: numberOfClaimsRecorded === 0 ? <span className="loader"></span> : numberOfClaimsRecorded, suffix: '', label: 'Settled claims', target: numberOfClaimsRecorded }, // Fixed this line
+    { id: 3, number: 92.88, suffix: '%', label: 'Customer satisfaction rate', target: 92.88 },
+    { id: 4, number: 1, suffix: 'Minute', label: 'Turn Around Time', target: 1 }
   ]
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const Stats = () => {
         PoliciesRecorded: 0,
         ClaimsSettled: 0,
         customersSatisfaction: 0,
-        TurnAroundTime: 0
+        TurnAroundTime: 1
       })
 
       statsData.forEach(stat => {
@@ -104,7 +104,7 @@ const Stats = () => {
             ...prev,
             [stat.id === 1 ? 'PoliciesRecorded' :
               stat.id === 2 ? 'ClaimsSettled' :
-                stat.id === 3 ? 'customersSatisfaction' : 'TurnAroundTime']: current
+                stat.id === 3 ? 'customersSatisfaction' : 'Minute']: current
           }))
         }, duration / steps)
       })
@@ -142,11 +142,30 @@ const Stats = () => {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Why Choose Prime Life Insurance?
           </h2>
-          <p className="text-white/80 text-lg">
-            Prime Life Insurance provides credible, innovative, and reliable long-term insurance solutions.
-
-            We simplify insurance by delivering tailored, market-leading products efficiently, ensuring our clients across Rwanda receive fit-for-purpose protection and exceptional service.
-          </p>
+          <div className="text-white/90 text-lg max-w-4xl mx-auto">
+            <ul className="space-y-3 text-left inline-block">
+              <li className="flex items-start">
+                <span className="text-secondary mr-3 mt-1">•</span>
+                <span>Having peace of mind by securing your family</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-secondary mr-3 mt-1">•</span>
+                <span>Attaining your long-term goals</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-secondary mr-3 mt-1">•</span>
+                <span>Taking care of your beloved ones when you pass away</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-secondary mr-3 mt-1">•</span>
+                <span>Dealing better with debts</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-secondary mr-3 mt-1">•</span>
+                <span>Acquiring income replacement during unfortunate events</span>
+              </li>
+            </ul>
+          </div>
 
         </div>
 

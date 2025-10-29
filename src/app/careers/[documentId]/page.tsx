@@ -1,11 +1,12 @@
 import JobDetailsPage from "@/components/JobDetailsPage";
 
 interface JobDetailsPageProps {
-  params: {
+  params: Promise<{
     documentId: string;
-  };
+  }>;
 }
 
-export default function JobDetailsPageComponent({ params }: JobDetailsPageProps) {
+export default async function JobDetailsPageComponent({ params }: JobDetailsPageProps) {
+  // Note: JobDetailsPage component gets documentId from useParams internally
   return <JobDetailsPage />;
 }

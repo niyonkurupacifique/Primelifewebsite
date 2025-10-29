@@ -87,7 +87,7 @@ const OTPVerification = ({ onVerificationSuccess, onBackToLogin, userData }: OTP
 
     try {
       
-      const response = await fetch('https://apps.prime.rw/customerbackendtest/User/api/verify-otp', {
+      const response = await fetch('https://apps.prime.rw/customerbackend/User/api/verify-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ const OTPVerification = ({ onVerificationSuccess, onBackToLogin, userData }: OTP
 
     try {
       const username = currentData?.phoneNumber || currentData?.username
-      const response = await fetch(`https://apps.prime.rw/customerbackendtest/User/send-new-password?username=${username}`, {
+      const response = await fetch(`https://apps.prime.rw/customerbackend/User/send-new-password?username=${username}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

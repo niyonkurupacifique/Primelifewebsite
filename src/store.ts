@@ -18,6 +18,8 @@ import ChildrenFormData from './components/Reducers/ChildrenFormFieldsReducer'
 import ValuesModalReducer from './components/Reducers/ValuesModalReducer'
 import BeneficiariesReducer from './components/Reducers/BeneficiariesReducer'
 import InsuranceNmeReducer from './components/Reducers/GetInsuranceNameReducer'
+import SavingQuotationFormData from './components/Reducers/SavingQuotationFormFieldsReducers'
+import SavingQuotationResult from './components/Reducers/SavingQuotationResults'
 
 
 export const store = configureStore({
@@ -39,7 +41,9 @@ export const store = configureStore({
     childrenForm: ChildrenFormData,
     valuesModal: ValuesModalReducer,
     beneficiariesForm: BeneficiariesReducer,
-    insuranceName:InsuranceNmeReducer
+    insuranceName:InsuranceNmeReducer,
+    SavingQuotationformdata: SavingQuotationFormData,
+    SavingQuotationResults: SavingQuotationResult
     
   },
 });

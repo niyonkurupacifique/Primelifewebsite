@@ -10,7 +10,7 @@ const HeroBoardsOfDirectors = () => {
     {
       id: 1,
       title: "Board of Directors",
-      subtitle: "Join our quest and drive for excellence through innovation",
+      subtitle: "Driving Excellence Through Innovative Leadership",
       image: "./team-banner.jpg",
     },
   ]

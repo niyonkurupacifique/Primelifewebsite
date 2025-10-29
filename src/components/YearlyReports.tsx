@@ -60,7 +60,7 @@ const YearlyReports: React.FC = () => {
   const fetchYearlyReports = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://10.10.1.17:1338/api/yearly-report-managements?populate=File');
+      const response = await fetch('https://primelife.prime.rw:8080/api/yearly-report-managements?populate=File');
       
       if (!response.ok) {
         throw new Error('Failed to fetch yearly reports');
@@ -77,7 +77,7 @@ const YearlyReports: React.FC = () => {
           title: item.Title || item.File.name.replace('.pdf', '').replace(/_/g, ' '),
           date: year,
           year: year,
-          downloadUrl: `http://10.10.1.17:1338${item.File.url}`
+          downloadUrl: `https://primelife.prime.rw:8080${item.File.url}`
         };
       });
       
@@ -100,7 +100,7 @@ const YearlyReports: React.FC = () => {
 
     // Create socket connection with detailed logging
     console.log('🔌 Initializing Socket.IO connection for Yearly Reports...');
-    const newSocket: Socket = io('http://10.10.1.17:1338', {
+    const newSocket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
       forceNew: true, // Force a new connection

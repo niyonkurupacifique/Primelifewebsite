@@ -86,7 +86,7 @@ const HeroNkunganireInsurance = () => {
               className="w-full h-full bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${slide.image})` }}
             />
-            <div className="absolute inset-0 bg-primary/65" />
+            <div className="absolute inset-0 bg-primary/50" />
           </div>
         ))}
       </div>
@@ -107,7 +107,7 @@ const HeroNkunganireInsurance = () => {
       </div>
 
       {/* Navigation Arrows */}
-      <button
+      {/* <button
         onClick={prevSlide}
         className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors z-20"
       >
@@ -119,7 +119,7 @@ const HeroNkunganireInsurance = () => {
         className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors z-20"
       >
         <ChevronRight className="w-6 h-6" />
-      </button>
+      </button> */}
 
       {/* Dots Indicator */}
       {/* <div className="absolute bottom-44 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">

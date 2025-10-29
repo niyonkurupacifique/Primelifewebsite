@@ -4,7 +4,7 @@ const About = () => {
   const benefits = [
     "Customizable life insurance packages.",
     "Quick and transparent claims process.",
-    "Over 30 years serving Rwandan families."
+    "A legacy of serving Rwandan families."
   ]
 
   return (
@@ -61,12 +61,12 @@ const About = () => {
           <div className="w-full lg:w-1/2">
             <div className="relative rounded-lg overflow-hidden shadow-xl">
               <img
-                src="./educPic.jpg"
+                src="./Familia.png"
                 alt="Prime Life Family"
                 className="w-full h-auto object-cover "
               />
               <div className="absolute bottom-4 left-4 bg-primary text-white py-2 px-4 rounded-lg shadow-md">
-                <div className="text-xl font-semibold">30+ Years Experience</div>
+                <div className="text-xl font-semibold">Over 30 years serving Rwandan families.</div>
               </div>
             </div>
           </div>

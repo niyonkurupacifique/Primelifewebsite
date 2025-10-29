@@ -19,7 +19,7 @@ const EmployeeProtectionSummary: React.FC<EmployeeProtectionSummaryProps> = ({ o
 
     // Format currency function
     const formatCurrency = (amount: number) => {
-        return new Intl.NumberFormat('en-RW', {
+        return new Intl.NumberFormat('rw-RW', {
             style: 'currency',
             currency: 'RWF',
             minimumFractionDigits: 0,
@@ -38,7 +38,7 @@ const EmployeeProtectionSummary: React.FC<EmployeeProtectionSummaryProps> = ({ o
                 {/* Employee Protection Details Section */}
                 <div className=" dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
                     <div className="bg-[#00b0ef]/50 dark:bg-blue-900/20 px-6 py-4 rounded-t-lg border-b border-gray-200 dark:border-gray-600">
-                        <h3 className="text-lg font-semibold text-white dark:text-blue-300">Employee Protection Details</h3>
+                        <h3 className="text-lg font-semibold text-black dark:text-blue-300">Employee Protection Details</h3>
                     </div>
                     <div className="p-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -127,7 +127,7 @@ const EmployeeProtectionSummary: React.FC<EmployeeProtectionSummaryProps> = ({ o
                 {/* Employee Benefits Section */}
                 <div className=" dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
                     <div className="bg-[#00b0ef]/50 dark:bg-orange-900/20 px-6 py-4 rounded-t-lg border-b border-gray-200 dark:border-gray-600">
-                        <h3 className="text-lg font-semibold text-white dark:text-orange-300">Employee Benefits Coverage</h3>
+                        <h3 className="text-lg font-semibold text-black dark:text-orange-300">Employee Benefits Coverage</h3>
                     </div>
                     <div className="p-6">
                         <div className="space-y-6">
@@ -230,7 +230,7 @@ const EmployeeProtectionSummary: React.FC<EmployeeProtectionSummaryProps> = ({ o
                 {/* Beneficiaries Information Section */}
                 <div className=" dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
                     <div className="bg-[#00b0ef]/50 dark:bg-green-900/20 px-6 py-4 rounded-t-lg border-b border-gray-200 dark:border-gray-600">
-                        <h3 className="text-lg font-semibold text-white dark:text-green-300">Beneficiaries Information</h3>
+                        <h3 className="text-lg font-semibold text-black dark:text-green-300">Beneficiaries Information</h3>
                     </div>
                     <div className="p-6">
                         {beneficiariesData.length > 0 ? (
@@ -280,7 +280,7 @@ const EmployeeProtectionSummary: React.FC<EmployeeProtectionSummaryProps> = ({ o
                 {/* Next of Kin (Umusigire) Section */}
                 <div className=" dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
                     <div className="bg-[#00b0ef]/50 dark:bg-purple-900/20 px-6 py-4 rounded-t-lg border-b border-gray-200 dark:border-gray-600">
-                        <h3 className="text-lg font-semibold text-white dark:text-purple-300">Next of Kin (Umusigire)</h3>
+                        <h3 className="text-lg font-semibold text-black dark:text-purple-300">Next of Kin (Umusigire)</h3>
                     </div>
                     <div className="p-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -317,7 +317,7 @@ const EmployeeProtectionSummary: React.FC<EmployeeProtectionSummaryProps> = ({ o
             <div className="text-center mt-8">
                 <button onClick={onNext}
                     type="submit"
-                    className="px-8 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 font-medium text-lg"
+                    className="px-8 py-3 bg-[#159fdb] text-black rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 font-medium text-lg"
                 >
                     Continue to Next Step
                 </button>

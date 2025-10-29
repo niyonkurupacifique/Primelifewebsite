@@ -25,11 +25,11 @@ const HistorySection = () => {
       title: "Major Shareholders",
       description: "FINAFRICA and SP Aviation"
     },
-    {
-      year: "2023",
-      title: "Current Era",
-      description: "FINAFRICA acquired majority ownership"
-    },
+    // {
+    //   year: "2023",
+    //   title: "Current Era",
+    //   description: "FINAFRICA acquired majority ownership"
+    // },
     {
       year: "",
       title: "Strategic Focus",
@@ -109,10 +109,11 @@ const HistorySection = () => {
 
               <div className="bg-gradient-to-br from-secondary/5 to-primary/5 p-8 rounded-2xl border border-secondary/10">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Leading Life Insurance Provider in Rwanda
+                  Empowering Clients Through Digital Self-Service
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-6">
-                  Prime Life Insurance Ltd operates as a leading life insurer across Rwanda, with strong roots in the local market.
+                  Prime Life Insurance Ltd leverages technology to enhance customer convenience through digital self-service platforms like www.prime.rw
+ and USSD *177#..
                 </p>
 
 

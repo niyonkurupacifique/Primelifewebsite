@@ -4,13 +4,15 @@ import Footer from "../Footer"
 import BenefitsOfIntego from "../BenefitsOfIntego"
 import IntegoInsuranceFeatures from "../IntegoFeatures"
 import IntegoContractFormat from "../IntegoContractFormat"
+import SavingQuotationCalculator from "../SavingQuotation"
 
 const Intego=()=>{
     return(
         <>
         <Header/>
         <HeroIntego/>
-        <BenefitsOfIntego/>
+        <SavingQuotationCalculator/>
+        {/* <BenefitsOfIntego/> */}
         <IntegoInsuranceFeatures/>
         <IntegoContractFormat/>
 

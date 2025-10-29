@@ -95,7 +95,7 @@ const SignupForm = ({ onSignupSuccess, onBackToChoice }: {
         nationalId: formData.nationalId
       }
 
-      const response = await fetch('https://apps.prime.rw/customerbackendtest/User/api/register', {
+      const response = await fetch('https://apps.prime.rw/customerbackend/User/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

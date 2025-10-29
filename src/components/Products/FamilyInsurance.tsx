@@ -11,7 +11,7 @@ const FamilyInsurance=()=>{
         <Header/>
         <HeroFamilyInsurance/>
         <FamilyQuotationCalculator/>
-        <BenefitsOfFamilyInsurance/>
+        {/* <BenefitsOfFamilyInsurance/> */}
         <FamilyInsuranceFeatures/>
         <FamilyContractFormat/>
 

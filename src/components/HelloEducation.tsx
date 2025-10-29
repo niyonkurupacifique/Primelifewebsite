@@ -85,7 +85,7 @@ const HeroEducation = () => {
               className="w-full h-full bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${slide.image})` }}
             />
-            <div className="absolute inset-0 bg-primary/70" />
+            <div className="absolute inset-0 bg-primary/50" />
           </div>
         ))}
       </div>

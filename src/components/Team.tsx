@@ -3,6 +3,7 @@
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { io, Socket } from 'socket.io-client'
+import { useRouter } from 'next/navigation'
 
 
 import * as React from 'react';
@@ -108,7 +109,7 @@ const Team = () => {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
+ const router=useRouter()
   const [open, setOpen] = React.useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   
@@ -124,14 +125,45 @@ const Team = () => {
   const fetchTeamMembers = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://10.10.1.17:1338/api/boardsof-directors-managements?populate=Image')
+      const response = await fetch('https://primelife.prime.rw:8080/api/boardsof-directors-managements?populate=Image')
       
       if (!response.ok) {
         throw new Error('Failed to fetch team members')
       }
       
       const data = await response.json()
-      setTeamMembers(data.data || [])
+      
+      // Sort team members by position hierarchy
+      const sortedMembers = (data.data || []).sort((a: TeamMember, b: TeamMember) => {
+        const positionHierarchy = {
+          'Chairman of the Board of Directors': 1,
+          'Vice-Chairman': 2,
+          'Vice Chairperson': 2,
+          'Member': 3,
+        }
+        
+        const getPositionRank = (position: string) => {
+          const normalizedPosition = position.toLowerCase().trim()
+          if (normalizedPosition.includes('chairman') && !normalizedPosition.includes('vice')) {
+            return positionHierarchy['Chairman of the Board of Directors']
+          }
+          if (normalizedPosition.includes('vice') && normalizedPosition.includes('chair')) {
+            return positionHierarchy['Vice-Chairman']
+          }
+          if (normalizedPosition.includes('member') || normalizedPosition === 'member') {
+            return positionHierarchy['Member']
+          }
+          // Default rank for other positions
+          return 99
+        }
+        
+        const rankA = getPositionRank(a.Position)
+        const rankB = getPositionRank(b.Position)
+        
+        return rankA - rankB
+      })
+      
+      setTeamMembers(sortedMembers)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
       console.error('Error fetching team members:', err)
@@ -146,7 +178,7 @@ const Team = () => {
 
     // Create socket connection with detailed logging
     console.log('🔌 Initializing Socket.IO connection...')
-    const socket: Socket = io('http://10.10.1.17:1338', {
+    const socket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
       forceNew: true, // Force a new connection
@@ -231,15 +263,15 @@ const Team = () => {
 
   // Always prefer the original
   if (image.url) {
-    return `http://10.10.1.17:1338${image.url}`
+    return `https://primelife.prime.rw:8080${image.url}`
   }
 
   // If for some reason original is missing, fallback
   if (image.formats?.small?.url) {
-    return `http://10.10.1.17:1338${image.formats.small.url}`
+    return `https://primelife.prime.rw:8080${image.formats.small.url}`
   }
   if (image.formats?.thumbnail?.url) {
-    return `http://10.10.1.17:1338${image.formats.thumbnail.url}`
+    return `https://primelife.prime.rw:8080${image.formats.thumbnail.url}`
   }
 
   return ''
@@ -407,9 +439,9 @@ const Team = () => {
             <p className="text-white/90 mb-6">
               Get in touch with our professional team to discuss your insurance needs and find the perfect policy for you.
             </p>
-            <a href="#contact" className="btn-secondary">
+             <button onClick={()=>router.push('/contactus')}  className="btn-secondary cursor-pointer">
               Contact Our Team
-            </a>
+            </button>
           </div>
         </div>
       </div>

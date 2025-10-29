@@ -43,13 +43,33 @@ const Header: React.FC = () => {
 
   return (
     <>
+      {/* Top Header Bar with Prime Life/General buttons */}
+      <div className="border-b border-gray-200 sticky top-0 z-50" style={{ backgroundColor: '#e0e4e9' }}>
+        <div className="container mx-auto px-4">
+          <div className="flex justify-end items-center py-2">
+            <div className="flex items-center space-x-1">
+              {/* <button className="bg-white text-gray-700 px-4 py-1 rounded-sm border border-gray-300 font-medium text-sm">
+                Prime Life
+              </button> */}
+              <span className="text-gray-400">-</span>
+              <button 
+                onClick={() => window.open('https://staging.prime.rw/Home', '_blank')}
+                className="bg-white text-[#f9d308] px-4 py-1 rounded-sm font-medium text-sm hover:bg-blue-600 transition-colors cursor-pointer"
+              >
+                Prime General
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Main Header */}
-      <header className="bg-white shadow-md sticky top-0 z-50">
+      <header className="bg-white shadow-md sticky top-[45px] z-40">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <a href="#" onClick={(e) => handleNavigation('/', e)} className="flex items-center">
+              <a href="#" onClick={(e) => handleNavigation('/Home', e)} className="flex items-center">
                 <img
                   src="https://prime.rw/public/themes/assets/img/Prime_Life_Insurance_Logo.PNG"
                   alt="Prime Life Logo"
@@ -63,7 +83,8 @@ const Header: React.FC = () => {
               <div className="main-menu__item  cursor-pointer">
                 <a
                  
-                  onClick={(e) => handleNavigation('/Home', e)}
+                  // onClick={(e) => handleNavigation('/Home', e)}
+                  onClick={() => window.open('https://staging.prime.rw', '_self')}
                   className="main-menu__link"
                 >
                   Home
@@ -72,22 +93,22 @@ const Header: React.FC = () => {
 
               {/* About Us Dropdown with Hover */}
               <div className="main-menu__item main-menu__dropdown">
-                <a href="#" className="main-menu__link main-menu__link--dropdown">
+                <a href="#" className="main-menu__link main-menu__link--dropdown cursor-pointer">
                   About us
                   <ChevronDown className="w-4 h-4 ml-1 transition-transform" />
                 </a>
                 <ul className="main-menu__submenu">
                   <li>
-                    <a  onClick={()=>{router.push('/whoweare')}} className="main-menu__submenu-link">Who we are</a>
+                    <a  onClick={()=>{router.push('/whoweare')}} className="main-menu__submenu-link cursor-pointer">Who we are</a>
                   </li>
                   <li>
-                    <a   onClick={()=>{router.push('/shareholders')}} className="main-menu__submenu-link">Shareholders</a>
+                    <a   onClick={()=>{router.push('/shareholders')}} className="main-menu__submenu-link cursor-pointer">Shareholders</a>
                   </li>
                   <li>
-                    <a  onClick={()=>{router.push('/boardmembers')}} className="main-menu__submenu-link">Board Members</a>
+                    <a  onClick={()=>{router.push('/boardmembers')}} className="main-menu__submenu-link cursor-pointer">Board Members</a>
                   </li>
                   <li>
-                    <a   onClick={()=>{router.push('/managementteam')}} className="main-menu__submenu-link">Management Team</a>
+                    <a   onClick={()=>{router.push('/managementteam')}} className="main-menu__submenu-link cursor-pointer">Management Team</a>
                   </li>
                  
                   <li className="has-submenu">
@@ -97,6 +118,7 @@ const Header: React.FC = () => {
                     <ul className="main-menu__submenu-nested">
                       <li><a   onClick={() => router.push('/salesagent')} className="main-menu__submenu-link cursor-pointer">Sales Agents</a></li>
                       <li><a onClick={() => router.push('/brokers')} className="main-menu__submenu-link cursor-pointer">Brokers</a></li>
+                       <li><a onClick={() => window.open('https://apps.prime.rw/customerportal/Home/products', '_blank')} className="main-menu__submenu-link cursor-pointer">Intermediaries Portal</a></li>
                     </ul>
                   </li>
                  
@@ -106,23 +128,55 @@ const Header: React.FC = () => {
                   </li>
                
                   <li>
-                    <a   onClick={()=>{router.push('/customercharter')}} className="main-menu__submenu-link">Customer Charter</a>
+                    <a   onClick={()=>{router.push('/customercharter')}} className="main-menu__submenu-link cursor-pointer">Customer Charter</a>
                   </li>
                 </ul>
               </div>
 
-              <div onClick={() => router.push('/#services')} className="main-menu__item">
-                <a
-                  href="#services"
-                  className="main-menu__link"
-                >
+              {/* Our Products Dropdown with Hover */}
+              <div className="main-menu__item main-menu__dropdown">
+                <a href="#" className="main-menu__link main-menu__link--dropdown cursor-pointer">
                   Our Products
+                  <ChevronDown className="w-4 h-4 ml-1 transition-transform" />
                 </a>
+                <ul className="main-menu__submenu">
+                  <li>
+                    <a onClick={() => router.push('/education')} className="main-menu__submenu-link cursor-pointer">Education Insurance</a>
+                  </li>
+                  <li>
+                    <a onClick={() => router.push('/family')} className="main-menu__submenu-link cursor-pointer">Family Insurance</a>
+                  </li>
+                  <li>
+                    <a onClick={() => router.push('/employeeprotection')} className="main-menu__submenu-link cursor-pointer">Employee Protection</a>
+                  </li>
+                  <li>
+                    <a onClick={() => router.push('/grouplife')} className="main-menu__submenu-link cursor-pointer">Group Life Insurance</a>
+                  </li>
+                  <li>
+                    <a onClick={() => router.push('/intego')} className="main-menu__submenu-link cursor-pointer">Intego Insurance</a>
+                  </li>
+                  <li>
+                    <a onClick={() => router.push('/loanprotection')} className="main-menu__submenu-link cursor-pointer">Loan Protection</a>
+                  </li>
+                  <li>
+                    <a onClick={() => router.push('/nkunganire')} className="main-menu__submenu-link cursor-pointer">Nkunganire Insurance</a>
+                  </li>
+                  <li>
+                    <a onClick={() => router.push('/ikimina')} className="main-menu__submenu-link cursor-pointer">Ikimina Cyacu</a>
+                  </li>
+                  <li>
+                    <a onClick={() => router.push('/umurage')} className="main-menu__submenu-link cursor-pointer">Umurage w'Amashuri</a>
+                  </li>
+                  {/* <li>
+                    <a onClick={() => router.push('/allproducts')} className="main-menu__submenu-link cursor-pointer">View All Products</a>
+                  </li> */}
+                </ul>
               </div>
+
 
               {/* Reports Dropdown with Hover */}
               <div className="main-menu__item main-menu__dropdown">
-                <a href="#" className="main-menu__link main-menu__link--dropdown">
+                <a href="#" className="main-menu__link main-menu__link--dropdown cursor-pointer">
                   Reports
                   <ChevronDown className="w-4 h-4 ml-1 transition-transform" />
                 </a>
@@ -141,14 +195,14 @@ const Header: React.FC = () => {
                     <a   onClick={()=>{router.push('/consumerprotectionreport')}} className="main-menu__submenu-link  cursor-pointer">Consumer Protection Reports</a>
                   </li>
                   <li>
-                    <a  className="main-menu__submenu-link">Fees Structure</a>
+                    <a  onClick={()=>{router.push('/allproduct')}}  className="main-menu__submenu-link cursor pointer">Fees Structure</a>
                   </li>
                 </ul>
               </div>
 
               {/* Updates Dropdown with Hover */}
-              <div className="main-menu__item main-menu__dropdown cursor-pointer">
-                <a  className="main-menu__link main-menu__link--dropdown cursor-pointer">
+              <div className="main-menu__item main-menu__dropdown">
+                <a href="#" className="main-menu__link main-menu__link--dropdown cursor-pointer">
                   Updates
                   <ChevronDown className="w-4 h-4 ml-1 transition-transform" />
                 </a>
@@ -222,7 +276,8 @@ const Header: React.FC = () => {
                 <li>
                   <a
                     href="#"
-                    onClick={(e) => handleNavigation('/Home', e)}
+                    // onClick={(e) => handleNavigation('/Home', e)}
+                     onClick={() => window.open('https://staging.prime.rw', '_self')}
                     className="block py-3 px-2 text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-md font-medium transition-colors"
                   >
                     Home
@@ -247,24 +302,24 @@ const Header: React.FC = () => {
                   }`}>
                     <ul className="ml-4 space-y-1 border-l-2 border-blue-100 pl-4">
                       <li>
-                        <a href=""  onClick={()=>{router.push('/whoweare')}} className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                        <button onClick={()=>{router.push('/whoweare')}} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
                           Who we are
-                        </a>
+                        </button>
                       </li>
                       <li>
-                        <a href=""  onClick={()=>{router.push('/shareholders')}} className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                        <button onClick={()=>{router.push('/shareholders')}} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
                           Shareholders
-                        </a>
+                        </button>
                       </li>
                       <li>
-                        <a href="" onClick={()=>{router.push('/boardmembers')}} className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                        <button onClick={()=>{router.push('/boardmembers')}} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
                           Board Members
-                        </a>
+                        </button>
                       </li>
                       <li>
-                        <a href="" onClick={()=>{router.push('/managementteam')}} className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                        <button onClick={()=>{router.push('/managementteam')}} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
                           Management Team
-                        </a>
+                        </button>
                       </li>
                       <li>
                         <button
@@ -283,36 +338,101 @@ const Header: React.FC = () => {
                         }`}>
                           <ul className="ml-4 space-y-1 border-l border-gray-200 pl-2">
                             <li>
-                              <a onClick={() => router.push('/salesagent')} className="block py-1 px-2 text-gray-500 cursor-pointer hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors">
+                              <button onClick={() => router.push('/salesagent')} className="block w-full text-left py-1 px-2 text-gray-500 hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors cursor-pointer">
                                 Sales Agents
-                              </a>
+                              </button>
                             </li>
                             <li>
-                              <a onClick={() => router.push('/brokers')} className="block py-1 px-2 text-gray-500 cursor-pointer hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors">
+                              <button onClick={() => router.push('/brokers')} className="block w-full text-left py-1 px-2 text-gray-500 hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors cursor-pointer">
                                 Brokers
-                              </a>
+                              </button>
+                            </li>
+                             <li>
+                              <button onClick={() => window.open('https://apps.prime.rw/customerportal/Home/products', '_blank')} className="block w-full text-left py-1 px-2 text-gray-500 hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors cursor-pointer">
+                                Sales Intermediaries Portal
+                              </button>
                             </li>
                           </ul>
                         </div>
                       </li>
                       <li>
-                        <a href=""   onClick={()=>{router.push('/customercharter')}} className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                        <button onClick={()=>{router.push('/customercharter')}} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
                           Customer Charter
-                        </a>
+                        </button>
                       </li>
                     </ul>
                   </div>
                 </li>
 
-                {/* Our Products */}
+                {/* Our Products Dropdown */}
                 <li>
-                  <a
-                    href="#services"
-                    onClick={(e) => handleNavigation('/#services', e)}
-                    className="block py-3 px-2 text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-md font-medium transition-colors"
+                  <button
+                    className={`flex items-center justify-between w-full py-3 px-2 text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-md font-medium transition-colors ${
+                      activeDropdown === 'products' ? 'text-blue-500 bg-blue-50' : ''
+                    }`}
+                    onClick={() => toggleMobileDropdown('products')}
                   >
                     Our Products
-                  </a>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
+                      activeDropdown === 'products' ? 'rotate-180' : ''
+                    }`} />
+                  </button>
+                  <div className={`overflow-hidden transition-all duration-300 ${
+                    activeDropdown === 'products' ? 'max-h-96 mt-2' : 'max-h-0'
+                  }`}>
+                    <ul className="ml-4 space-y-1 border-l-2 border-blue-100 pl-4">
+                      <li>
+                        <button onClick={() => router.push('/education')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                          Education Insurance
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={() => router.push('/family')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                          Family Insurance
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={() => router.push('/employeeprotection')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                          Employee Protection
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={() => router.push('/grouplife')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                          Group Life Insurance
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={() => router.push('/intego')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                          Intego Insurance
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={() => router.push('/loanprotection')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                          Loan Protection
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={() => router.push('/nkunganire')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                          Nkunganire Insurance
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={() => router.push('/ikimina')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                          Ikimina Cyacu
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={() => router.push('/umurage')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                          Umurage w'Amashuri
+                        </button>
+                      </li>
+                      {/* <li>
+                        <button onClick={() => router.push('/allproducts')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                          View All Products
+                        </button>
+                      </li> */}
+                    </ul>
+                  </div>
                 </li>
 
                 {/* Reports Dropdown */}
@@ -350,26 +470,26 @@ const Header: React.FC = () => {
                         }`}>
                           <ul className="ml-4 space-y-1 border-l border-gray-200 pl-2">
                             <li>
-                              <a onClick={() => router.push('/Quartelyreports')} className="block py-1 px-2 text-gray-500 cursor-pointer hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors">
+                              <button onClick={() => router.push('/Quartelyreports')} className="block w-full text-left py-1 px-2 text-gray-500 hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors cursor-pointer">
                                 Quarter Reports
-                              </a>
+                              </button>
                             </li>
                             <li>
-                              <a onClick={() => router.push('/Yearlyreports')} className="block py-1 px-2 text-gray-500 cursor-pointer hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors">
+                              <button onClick={() => router.push('/Yearlyreports')} className="block w-full text-left py-1 px-2 text-gray-500 hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors cursor-pointer">
                                 Annual Reports
-                              </a>
+                              </button>
                             </li>
                           </ul>
                         </div>
                       </li>
                      
                       <li>
-                        <a onClick={()=>{router.push('/consumerprotectionreport')}} className="block cursor-pointer py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                        <button onClick={()=>{router.push('/consumerprotectionreport')}} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
                           Consumer Protection Reports
-                        </a>
+                        </button>
                       </li>
                       <li>
-                        <a href="#fees-structure" className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                        <a onClick={()=>{router.push('/allproduct')}} className="block py-2 cursor-pointer px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
                           Fees Structure
                         </a>
                       </li>
@@ -395,19 +515,19 @@ const Header: React.FC = () => {
                   }`}>
                     <ul className="ml-4 space-y-1 border-l-2 border-blue-100 pl-4">
                       <li>
-                        <a onClick={() => router.push('/faq')} className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                        <button onClick={() => router.push('/faq')} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
                           Frequently Asked Questions
-                        </a>
+                        </button>
                       </li>
                       <li>
-                        <a onClick={()=>{router.push('/allnews')}} className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
+                        <button onClick={()=>{router.push('/allnews')}} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
                           Blogs & News
-                        </a>
+                        </button>
                       </li>
                       <li>
-                        <a onClick={()=>{router.push('/careers')}} className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                        <button onClick={()=>{router.push('/careers')}} className="block w-full text-left py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors cursor-pointer">
                           Careers & Jobs
-                        </a>
+                        </button>
                       </li>
                       <li>
                         <a href="#tenders" className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">

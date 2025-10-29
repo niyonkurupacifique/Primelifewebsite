@@ -8,7 +8,7 @@ const Hero = () => {
   const slides = [
     {
       id: 1,
-      title: "Prime Life Insurance",
+      title: "Secure tomorrow today",
       subtitle: "Secure tomorrow today.",
       video: "./Prime Life Insurance - Web Animation 2.mp4",
     },
@@ -47,7 +47,7 @@ const Hero = () => {
       description: "Start your claim process in just a few steps.",
       action: () => {
         // Open external link
-        window.open('https://apps.prime.rw/customerportaltest/Home/products', '_blank');
+        window.open('https://apps.prime.rw/customerportal/Home/products', '_blank');
       }
     },
     {
@@ -57,7 +57,7 @@ const Hero = () => {
       description: "Access your policy documents and financial statements with ease.",
       action: () => {
         // Open external link
-        window.open('https://apps.prime.rw/customerportaltest/Home/products', '_blank');
+        window.open('https://apps.prime.rw/customerportal/Home/products', '_blank');
       }
     },
     {
@@ -104,7 +104,12 @@ const Hero = () => {
               loop
               muted
               playsInline
+              preload="auto"
               className="w-full h-full object-cover"
+              style={{ 
+                objectFit: 'cover',
+                imageRendering: 'crisp-edges',
+              }}
             >
               <source src={slide.video} type="video/mp4" />
               Your browser does not support the video tag.
@@ -114,14 +119,14 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* Centered Content */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 px-4 sm:px-6 lg:px-8">
+      {/* Centered Content - Mobile Only */}
+      <div className="absolute inset-0 flex items-center justify-center z-10 px-4 sm:px-6 lg:px-8 md:hidden">
         <div className="text-center max-w-4xl">
-          <div className="max-w-4xl text-white">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
-              {/* {slides[currentSlide].title} */}
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 opacity-90 leading-relaxed max-w-2xl">
+          <div className="max-w-4xl bg-white/80 backdrop-blur-sm px-6 py-8 rounded-2xl shadow-2xl">
+            {/* <h1 className="text-3xl sm:text-4xl font-bold mb-4 leading-tight text-[#00b0ef] drop-shadow-md">
+              {slides[currentSlide].title}
+            </h1> */}
+            <p className="text-base sm:text-lg mb-6 opacity-90 leading-relaxed max-w-2xl">
               {/* {slides[currentSlide].subtitle} */}
             </p>
             {/* CTA Button for mobile */}

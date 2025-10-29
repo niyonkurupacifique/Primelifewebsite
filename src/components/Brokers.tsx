@@ -20,9 +20,9 @@ const BrokersComponents = () => {
   }, [])
 
   const [query, setQuery] = useState('')
-  const [agents, setAgents] = useState<{ id: number; name: string; phone: string; email: string; year: string; quarter: string }[]>([])
+  const [agents, setAgents] = useState<{ id: number; name: string; phone: string; Category: string; year: string; quarter: string }[]>([])
 
-  const API_BASE_URL = 'http://10.10.1.17:1338'
+  const API_BASE_URL = 'https://primelife.prime.rw:8080'
 
   const fetchAgents = async () => {
     try {
@@ -30,11 +30,14 @@ const BrokersComponents = () => {
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const json = await res.json()
       const items = Array.isArray(json?.data) ? json.data : []
+
+      console.log("brokersss",items)
+
       const mapped = items.map((item: any) => ({
         id: item.id,
         name: item.BrokerName,
         phone: item.Phone,
-        email: item.Email,
+        Category: item.Category,
         year: item.Year,
         quarter: (item.Quarter || '').toUpperCase().trim()
       }))
@@ -83,7 +86,7 @@ const BrokersComponents = () => {
     return agents.filter(a =>
       normalized(a.name).includes(q) ||
       normalized(a.phone).includes(q) ||
-      normalized(a.email).includes(q)
+      normalized(a.Category).includes(q)
     )
   }, [agents, query])
 
@@ -156,9 +159,9 @@ const BrokersComponents = () => {
               <table className="w-full border-separate border-spacing-0 text-sm">
                 <thead className="bg-[#16a0db] sticky top-0 z-10">
                   <tr>
-                    <th scope="col" className="py-3.5 px-6 text-left text-xs font-semibold tracking-wide uppercase text-gray-700">Agent Name</th>
+                    <th scope="col" className="py-3.5 px-6 text-left text-xs font-semibold tracking-wide uppercase text-gray-700">Broker Name</th>
                     <th scope="col" className="py-3.5 px-6 text-left text-xs font-semibold tracking-wide uppercase text-gray-700">Phone</th>
-                    <th scope="col" className="py-3.5 px-6 text-left text-xs font-semibold tracking-wide uppercase text-gray-700">Email</th>
+                    <th scope="col" className="py-3.5 px-6 text-left text-xs font-semibold tracking-wide uppercase text-gray-700">Category</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -174,7 +177,7 @@ const BrokersComponents = () => {
                           <a href={`tel:${agent.phone.replace(/\s+/g,'')}`} className="text-gray-700 hover:text-gray-900">{agent.phone}</a>
                         </td>
                         <td className="px-6 py-4">
-                          <a href={`mailto:${agent.email}`} className="text-primary hover:underline">{agent.email}</a>
+                          <span  className="text-primary hover:underline">{agent.Category}</span>
                         </td>
                       </tr>
                     ))
@@ -201,9 +204,9 @@ const BrokersComponents = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.25 6.75c0 8.284 6.716 15 15 15h1.5a1.5 1.5 0 001.5-1.5v-2.1a1.5 1.5 0 00-1.3-1.49l-3.18-.53a1.5 1.5 0 00-1.23.36l-.9.75a12.03 12.03 0 01-5.32-5.32l.75-.9a1.5 1.5 0 00.36-1.23l-.53-3.18A1.5 1.5 0 006.6 3.75H4.5A1.5 1.5 0 003 5.25v1.5z"/></svg>
                         {agent.phone}
                       </a>
-                      <a href={`mailto:${agent.email}`} className="inline-flex items-center gap-2 text-sm text-primary hover:underline">
+                      <a href={`mailto:${agent.Category}`} className="inline-flex items-center gap-2 text-sm text-primary hover:underline">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-4 w-4"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        {agent.email}
+                        {agent.Category}
                       </a>
                     </div>
                   </div>

@@ -558,7 +558,7 @@ const Beneficiaries: React.FC<BeneficiariesProps> = ({
               <button
                 type="button"
                 onClick={handleNext}
-                className="px-8 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 font-medium text-lg"
+                className="px-8 py-3 bg-[#159fdb] text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 font-medium text-lg"
             >
               Continue to Next Step
             </button>

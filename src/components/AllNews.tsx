@@ -10,6 +10,7 @@ import { fetchNews, getRecentNews, formatDate } from '../services/newsApi'
 import type { NewsArticle } from '../types/news'
 import { io, Socket } from 'socket.io-client'
 import { useRouter } from 'next/navigation'
+import { getBestImageUrl, getFallbackImageUrl } from '../utils/imageUtils'
 
 const AllNews = () => {
   const router = useRouter()
@@ -24,7 +25,11 @@ const AllNews = () => {
   const fetchNewsData = async (): Promise<NewsArticle[]> => {
     try {
       const response = await fetchNews()
-      return response.data
+      // Sort by published date descending (most recent first)
+      const sorted = Array.isArray(response.data)
+        ? [...response.data].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+        : []
+      return sorted
     } catch (error) {
       console.error('Error fetching news:', error)
       return []
@@ -34,7 +39,7 @@ const AllNews = () => {
   // Socket.IO setup and event listeners
   useEffect(() => {
     // Initialize Socket.IO connection
-    const newSocket = io('http://10.10.1.17:1338', {
+    const newSocket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 20000,
     })
@@ -205,9 +210,13 @@ const AllNews = () => {
                   {/* Article Image */}
                   <div className="relative overflow-hidden">
                     <img
-                      src={`http://10.10.1.17:1338${article.MainPicture.url}`}
+                      src={getBestImageUrl(article.MainPicture)}
                       alt={article.MainPicture.alternativeText || article.Title}
                       className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = getFallbackImageUrl();
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     

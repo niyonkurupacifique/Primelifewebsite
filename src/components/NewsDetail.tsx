@@ -8,6 +8,7 @@ import Footer from './Footer'
 import { fetchNewsById, fetchNews } from '../services/newsApi'
 import type { NewsArticle } from '../types/news'
 import { io, Socket } from 'socket.io-client'
+import { getBestImageUrl, getFallbackImageUrl } from '../utils/imageUtils'
 
 const NewsDetail = () => {
   const { documentId } = useParams<{ documentId: string }>()
@@ -42,10 +43,10 @@ const NewsDetail = () => {
     try {
       const response = await fetchNews()
       if (response.data && Array.isArray(response.data)) {
-        // Get 3 most recent news articles, excluding the current one
-        const filteredNews = response.data
-          // .filter(news => news.documentId !== documentId)
+        // Get 3 most recent news articles by published date
+        const filteredNews = [...response.data]
           .filter(news => news.documentId)
+          .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
           .slice(0, 3)
         return filteredNews
       }
@@ -59,7 +60,7 @@ const NewsDetail = () => {
   // Socket.IO setup and event listeners
   useEffect(() => {
     // Initialize Socket.IO connection
-    const newSocket = io('http://10.10.1.17:1338', {
+    const newSocket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 20000,
     })
@@ -267,9 +268,13 @@ const NewsDetail = () => {
                 {/* Main Image */}
                 <div className="mb-8">
                   <img
-                    src={`${'http://10.10.1.17:1338'}${article.MainPicture.url}`}
+                    src={getBestImageUrl(article.MainPicture)}
                     alt={article.Title}
                     className="w-full h-64 md:h-96 object-cover rounded-lg"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = getFallbackImageUrl();
+                    }}
                   />
                 </div>
 
@@ -286,9 +291,13 @@ const NewsDetail = () => {
                 {article.Picture1 && (
                   <div className="mb-8">
                     <img
-                      src={`${'http://10.10.1.17:1338'}${article.Picture1.url}`}
+                      src={getBestImageUrl(article.Picture1)}
                       alt={article.Picture1Contents}
                       className="w-full h-64 md:h-96 object-cover rounded-lg mb-4"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = getFallbackImageUrl();
+                      }}
                     />
                     <p className="text-lg font-bold text-gray-800 text-center">
                       {article.Picture1Contents}
@@ -299,9 +308,13 @@ const NewsDetail = () => {
                 {article.Picture2 && (
                   <div className="mb-8">
                     <img
-                      src={`${ 'http://10.10.1.17:1338'}${article.Picture2.url}`}
+                      src={getBestImageUrl(article.Picture2)}
                       alt={article.Picture2Content}
                       className="w-full h-64 md:h-96 object-cover rounded-lg mb-4"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = getFallbackImageUrl();
+                      }}
                     />
                     <p className="text-lg font-bold text-gray-800 text-center">
                       {article.Picture2Content}
@@ -312,9 +325,13 @@ const NewsDetail = () => {
                 {article.Picture3 && (
                   <div className="mb-8">
                     <img
-                      src={`${ 'http://10.10.1.17:1338'}${article.Picture3.url}`}
+                      src={getBestImageUrl(article.Picture3)}
                       alt={article.Picture3Content}
                       className="w-full h-64 md:h-96 object-cover rounded-lg mb-4"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = getFallbackImageUrl();
+                      }}
                     />
                     <p className="text-lg font-bold text-gray-800 text-center">
                       {article.Picture3Content}
@@ -345,9 +362,13 @@ const NewsDetail = () => {
                           <div className="flex items-start space-x-3">
                             <div className="flex-shrink-0">
                               <img
-                                src={`${ 'http://10.10.1.17:1338'}${news.MainPicture.url}`}
+                                src={getBestImageUrl(news.MainPicture)}
                                 alt={news.Title}
                                 className="w-16 h-16 object-cover rounded"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.src = getFallbackImageUrl();
+                                }}
                               />
                             </div>
                             <div className="flex-1 min-w-0">

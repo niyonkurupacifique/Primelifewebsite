@@ -3,6 +3,7 @@
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { io, Socket } from 'socket.io-client'
+import { useRouter } from 'next/navigation'
 
 
 import * as React from 'react';
@@ -108,7 +109,7 @@ const ManagementTeam = () => {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
+  const router=useRouter()
   const [open, setOpen] = React.useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   
@@ -124,7 +125,7 @@ const ManagementTeam = () => {
   const fetchTeamMembers = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://10.10.1.17:1338/api/management-teams?populate=Image')
+      const response = await fetch('https://primelife.prime.rw:8080/api/management-teams?populate=Image')
       
       if (!response.ok) {
         throw new Error('Failed to fetch team members')
@@ -132,7 +133,59 @@ const ManagementTeam = () => {
       
       const data = await response.json()
       console.log("data fetched is",data)
-      setTeamMembers(data.data || [])
+      
+      // Sort team members by position hierarchy
+      const sortedMembers = (data.data || []).sort((a: TeamMember, b: TeamMember) => {
+        const positionHierarchy = {
+          'Chief Executive Officer': 1,
+          'Chief Finance Officer': 2,
+          'Technical Director': 3,
+          'Director of ICT and Innovation': 4,
+          'Commercial Director': 5,
+          'Legal Affairs & Company Secretary Manager': 6,
+        }
+        
+        const getPositionRank = (position: string) => {
+          const normalizedPosition = position.toLowerCase().trim()
+          
+          // Check for exact matches first
+          for (const [key, rank] of Object.entries(positionHierarchy)) {
+            if (normalizedPosition === key.toLowerCase()) {
+              return rank
+            }
+          }
+          
+          // Check for partial matches
+          if (normalizedPosition.includes('chief executive') || normalizedPosition.includes('ceo')) {
+            return positionHierarchy['Chief Executive Officer']
+          }
+          if (normalizedPosition.includes('chief finance') || normalizedPosition.includes('cfo')) {
+            return positionHierarchy['Chief Finance Officer']
+          }
+          if (normalizedPosition.includes('technical director')) {
+            return positionHierarchy['Technical Director']
+          }
+          if (normalizedPosition.includes('ict') || normalizedPosition.includes('innovation')) {
+            return positionHierarchy['Director of ICT and Innovation']
+          }
+          if (normalizedPosition.includes('commercial director')) {
+            return positionHierarchy['Commercial Director']
+          }
+          if (normalizedPosition.includes('legal') || normalizedPosition.includes('secretary')) {
+            return positionHierarchy['Legal Affairs & Company Secretary Manager']
+          }
+          
+          // Default rank for other positions
+          return 99
+        }
+        
+        const rankA = getPositionRank(a.Position)
+        const rankB = getPositionRank(b.Position)
+        
+        return rankA - rankB
+      })
+      
+      setTeamMembers(sortedMembers)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
       console.error('Error fetching team members:', err)
@@ -147,7 +200,7 @@ const ManagementTeam = () => {
 
     // Create socket connection with detailed logging
     console.log('🔌 Initializing Socket.IO connection...')
-    const socket: Socket = io('http://10.10.1.17:1338', {
+    const socket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
       forceNew: true, // Force a new connection
@@ -232,15 +285,15 @@ const ManagementTeam = () => {
 
   // Always prefer the original
   if (image.url) {
-    return `http://10.10.1.17:1338${image.url}`
+    return `https://primelife.prime.rw:8080${image.url}`
   }
 
   // If for some reason original is missing, fallback
   if (image.formats?.small?.url) {
-    return `http://10.10.1.17:1338${image.formats.small.url}`
+    return `https://primelife.prime.rw:8080${image.formats.small.url}`
   }
   if (image.formats?.thumbnail?.url) {
-    return `http://10.10.1.17:1338${image.formats.thumbnail.url}`
+    return `https://primelife.prime.rw:8080${image.formats.thumbnail.url}`
   }
 
   return ''
@@ -418,9 +471,9 @@ const ManagementTeam = () => {
             <p className="text-white/90 mb-6">
               Get in touch with our professional team to discuss your insurance needs and find the perfect policy for you.
             </p>
-            <a href="#contact" className="btn-secondary">
+            <button onClick={()=>router.push('/contactus')}  className="btn-secondary cursor-pointer">
               Contact Our Team
-            </a>
+            </button>
           </div>
         </div>
       </div>

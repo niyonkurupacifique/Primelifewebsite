@@ -35,7 +35,7 @@ export const formatDateForInput = (dateString: string): string => {
 export const searchSubscriber = async (nationalId: string): Promise<NidaResponse | null> => {
   try {
     // Replace this URL with your actual NIDA API endpoint
-    const response = await fetch(`https://apps.prime.rw/customerbackendtest/User/api/CheckNationalId`, {
+    const response = await fetch(`https://apps.prime.rw/customerbackend/User/api/CheckNationalId`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

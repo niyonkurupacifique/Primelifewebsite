@@ -22,7 +22,7 @@ const NkunganireShoferiSummary: React.FC<NkunganireShoferiSummaryProps> = ({ onN
 
     // Format currency function
     const formatCurrency = (amount: number) => {
-        return new Intl.NumberFormat('en-RW', {
+        return new Intl.NumberFormat('rw-RW', {
             style: 'currency',
             currency: 'RWF',
             minimumFractionDigits: 0,
@@ -222,7 +222,7 @@ const NkunganireShoferiSummary: React.FC<NkunganireShoferiSummaryProps> = ({ onN
             <div className="text-center mt-8">
                <button onClick={onNext}
                     type="submit"
-                    className="px-8 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 font-medium text-lg"
+                    className="px-8 py-3 bg-[#159fdb] text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 font-medium text-lg"
                 >
                     Continue to Next Step
                 </button>

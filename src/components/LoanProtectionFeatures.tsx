@@ -9,7 +9,7 @@ const LoanInsuranceFeatures = () => {
           <h2 className="text-2xl font-bold text-[#003366] mb-6">Loan Insurance</h2>
           
           <div className="flex items-start space-x-3 mb-4">
-            <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="w-6 h-6 bg-[#003366] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <p className="text-gray-700 leading-relaxed">
@@ -24,7 +24,7 @@ const LoanInsuranceFeatures = () => {
           <h2 className="text-2xl font-bold text-[#003366] mb-6">Loan Protection Insurance</h2>
           
           <div className="flex items-start space-x-3 mb-4">
-            <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="w-6 h-6 bg-[#003366] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <p className="text-gray-700 leading-relaxed">
@@ -45,7 +45,7 @@ const LoanInsuranceFeatures = () => {
           <h2 className="text-2xl font-bold text-[#003366] mb-6">Special benefits</h2>
           
           <div className="flex items-start space-x-3 mb-4">
-            <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="w-6 h-6 bg-[#003366] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
               <span className="text-white text-sm font-bold">✓</span>
             </div>
             <p className="text-gray-700 leading-relaxed">

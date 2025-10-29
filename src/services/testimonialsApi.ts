@@ -1,6 +1,6 @@
 import type { TestimonialsResponse, Testimonial } from '../types/testimonials';
 
-const API_BASE_URL = 'http://10.10.1.17:1338/api';
+const API_BASE_URL = 'https://primelife.prime.rw:8080/api';
 
 export const fetchTestimonials = async (): Promise<Testimonial[]> => {
   try {

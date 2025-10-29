@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://10.10.1.17:1338/api'
+const API_BASE_URL = 'https://primelife.prime.rw:8080/api'
 
 export type SalesAgentApiItem = {
   id: number

@@ -28,7 +28,7 @@ const BenefitsOfLoanProtection=()=>{
                     benefits.map((item)=>{
                         return(<div className="flex space-x-3 items-center pr-5 Fundsaremade space-y-7 mt-5 pb-5">
                             <div className=" ">
-                                         <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                         <div className="w-6 h-6 bg-[#003366] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
               <span className="text-white text-sm font-bold">✓</span>
             </div>
                 </div>

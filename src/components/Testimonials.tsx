@@ -14,7 +14,7 @@ const Testimonials = () => {
 
   // API call function directly in component
   const fetchTestimonials = async (): Promise<Testimonial[]> => {
-    const API_BASE_URL = 'http://10.10.1.17:1338/api';
+    const API_BASE_URL = 'https://primelife.prime.rw:8080/api';
     
     try {
       const response = await fetch(`${API_BASE_URL}/what-our-clients-says?populate=ProfilePic`);
@@ -63,7 +63,7 @@ const Testimonials = () => {
   // Socket.IO setup and event listeners
   useEffect(() => {
     // Initialize Socket.IO connection
-    const newSocket = io('http://10.10.1.17:1338', {
+    const newSocket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 20000,
     });

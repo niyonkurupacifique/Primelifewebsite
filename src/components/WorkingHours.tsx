@@ -24,14 +24,18 @@ const router = useRouter()
                                     <span className="font-medium">Monday - Friday:</span>
                                     <span>8:00 AM - 5:00 PM</span>
                                 </div>
-                                <div className="flex ">
+                                 <div className="flex ">
+                                    <span className="font-medium whitespace-nowrap">Saturday - Sunday:</span>
+                                    <span>Our Office is Closed – Online Services Are Available 24/7</span>
+                                </div>
+                                {/* <div className="flex ">
                                     <span className="font-medium">Saturday:</span>
                                     <span>Closed</span>
                                 </div>
                                 <div className="flex ">
                                     <span className="font-medium">Sunday:</span>
                                     <span>Closed</span>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 
@@ -61,14 +65,14 @@ const router = useRouter()
 
                         <div className="space-y-4 mb-8">
                             <button onClick={()=>{router.push('/managementteam')}} className="w-full max-w-xs bg-[#00b0ef] border-2 border-[#3b82f6] text-white px-6 py-3 rounded-full hover:bg-[#00b0ef] hover:text-white transition-colors inline-flex items-center justify-center space-x-2">
-                                <span>Meet the team</span>
+                                <span>Meet our team</span>
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
                             </button>
 
                             <button onClick={() => router.push('/salesagent')} className="w-full max-w-xs bg-[#00b0ef] border-2 border-[#3b82f6] text-white px-6 py-3 rounded-full hover:bg-[#00b0ef] hover:text-white transition-colors inline-flex items-center justify-center space-x-2">
-                                <span>Meet prime life agents</span>
+                                <span>Meet our sales advisors</span>
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>

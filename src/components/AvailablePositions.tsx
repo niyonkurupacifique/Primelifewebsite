@@ -32,7 +32,7 @@ const AvailablePositions: React.FC = () => {
   const fetchJobs = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://10.10.1.17:1338/api/job-managements')
+      const response = await fetch('https://primelife.prime.rw:8080/api/job-managements')
       if (!response.ok) {
         throw new Error('Failed to fetch job data')
       }
@@ -65,7 +65,7 @@ const AvailablePositions: React.FC = () => {
 
     // Create socket connection with detailed logging
     console.log('🔌 Initializing Socket.IO connection for Available Positions...')
-    const newSocket: Socket = io('http://10.10.1.17:1338', {
+    const newSocket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
       forceNew: true, // Force a new connection

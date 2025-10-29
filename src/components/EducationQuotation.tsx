@@ -100,7 +100,7 @@ const [CycleArray, setCycleArray] = useState([
    console.log("incompleteFields",incompleteFields)
 
   const formatCurrency = (amount: number): string => {
-    return new Intl.NumberFormat('en-RW', {
+    return new Intl.NumberFormat('rw-RW', {
       style: 'currency',
       currency: 'RWF',
       minimumFractionDigits: 0
@@ -175,14 +175,14 @@ const [CycleArray, setCycleArray] = useState([
     doc.rect(0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight(), 'F');
   
     // Add company logo
-    const logoImage = 'https://apps.prime.rw/customerportal/images/primelogo.png';
+    const logoImage = './primelogo.png';
     const img = new Image();
     img.src = logoImage;
     const logoWidth = 40;
     const logoHeight = logoWidth * img.naturalHeight / img.naturalWidth;
     const logoX = 15;
     const logoY = 15;
-    doc.addImage('https://apps.prime.rw/customerportal/images/primelogo.png', 'png', 14, 11, 0, 25);
+    doc.addImage('./primelogo.png', 'png', 14, 11, 0, 25);
     
     // Add title
     // Add title with higher contrast
@@ -369,7 +369,7 @@ const [CycleArray, setCycleArray] = useState([
   
     const signatureX = doc.internal.pageSize.width - 75;
   
-    doc.addImage('https://apps.prime.rw/customerportal/images/stamp.png', 'png', signatureX, doc.internal.pageSize.height - 60, 65, 45);
+    doc.addImage('./stamp.png', 'png', signatureX, doc.internal.pageSize.height - 60, 65, 45);
   
     ////////////////////////////////////////////////////////////
   
@@ -409,11 +409,11 @@ const [CycleArray, setCycleArray] = useState([
    const HandleCalculateQuotation = async () => {
   setIncompleteFields([]);
   
-  if(yearOfBirth === "" && Premium === 0 && Cycle === "Select") {
+  if(yearOfBirth === "" && Premium < 5000 || !Premium && Cycle === "Select") {
     setIncompleteFields(prev => [...prev, "yearOfBirth", "Premium", "Cycle"]);
     return;
   }
-  else if(yearOfBirth === "" && Premium === 0) {
+  else if(yearOfBirth === "" && Premium < 5000 || !Premium) {
     setIncompleteFields(prev => [...prev, "yearOfBirth", "Premium"]);
     return;
   }
@@ -421,11 +421,12 @@ const [CycleArray, setCycleArray] = useState([
     setIncompleteFields(prev => [...prev, "yearOfBirth", "Cycle"]);
     return;
   }
-  else if(Premium === 0 && Cycle === "Select") {
-    setIncompleteFields(prev => [...prev, "Cycle", "Premium"]);
-    return;
-  }
-  else if(Premium === 0) {
+  else if ((Premium < 5000 || !Premium|| !Premium) && Cycle === "Select") {
+  setIncompleteFields(prev => [...prev, "Cycle", "Premium"]);
+  return;
+}
+
+  else if(Premium < 5000 || !Premium) {
     setIncompleteFields(prev => [...prev, "Premium"]);
     return;
   }
@@ -443,7 +444,7 @@ const [CycleArray, setCycleArray] = useState([
       const currentYear = new Date().getFullYear();
       const age = currentYear - parseInt(yearOfBirth);
       
-      const result = await fetch(`https://apps.prime.rw/customerbackendtest/api/rate_per_mille?age=${age}&premiumFrequency=${PremiumFrequency}&benefitYears=${BenefitYears}&contributionYears=${ContributionYears}`);
+      const result = await fetch(`https://apps.prime.rw/customerbackend/api/rate_per_mille?age=${age}&premiumFrequency=${PremiumFrequency}&benefitYears=${BenefitYears}&contributionYears=${ContributionYears}`);
       const result2 = await result.json();
       
       setRatePerMille(result2.rate_per_mille);
@@ -516,7 +517,7 @@ const handleBuyInsurance = () => {
               {/* Basic Loan Information */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                  <div>
-                  <label className="block text-white/80 text-sm mb-2">{incompleteFields.includes("Premium")?<span className=' text-red-500'>Premium is Required</span>:<span>Premium</span>}</label>
+                  <label className="block text-white/80 text-sm mb-2">{incompleteFields.includes("Premium")?<span className=' text-red-500'>Premium must be at least 5,000 Rwf</span>:<span>Premium</span>}</label>
                   <input
                     type="number"
                     onChange={(e) => dispatch(setPremium(Number(e.target.value)))}

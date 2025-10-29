@@ -23,7 +23,7 @@ const ShareHoldersComponents = () => {
       <Header />
       <main className="relative">
         {/* Hero Section */}
-        <section className="relative">
+        <section className="relative bg-gradient-to-r from-primary via-primary to-primary">
           <HeroShareHolders />
         </section>
 

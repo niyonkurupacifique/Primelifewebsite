@@ -33,7 +33,7 @@ const HeroComplaints = () => {
   }, [])
 
   return (
-    <section style={{height:'409.01666259765625px'}} className="relative h-screen overflow-hidden">
+    <section  className="relative h-[30vh] min-h-[300px] overflow-hidden">
       {/* Slider Images */}
       <div className="relative w-full h-full">
         {slides.map((slide, index) => (
@@ -68,19 +68,19 @@ const HeroComplaints = () => {
       </div>
 
       {/* Navigation Arrows */}
-      <button
+      {/* <button
         onClick={prevSlide}
         className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors z-20"
       >
         <ChevronLeft className="w-6 h-6" />
-      </button>
+      </button> */}
 
-      <button
+      {/* <button
         onClick={nextSlide}
         className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors z-20"
       >
         <ChevronRight className="w-6 h-6" />
-      </button>
+      </button> */}
 
       {/* Dots Indicator */}
       {/* <div className="absolute bottom-44 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">

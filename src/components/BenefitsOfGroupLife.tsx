@@ -1,6 +1,3 @@
-
-import ContactForm from "./GetInTouch";
-
 const BenefitsOfGroupLifeInsurance=()=>{
     const benefits = [
     "Lump sum paid and fixed funeral costs paid to the next-of-kin in the event of an employee’s premature death.",
@@ -10,45 +7,26 @@ const BenefitsOfGroupLifeInsurance=()=>{
  
     return(
         <section>
-
-            <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 sm:grid-cols-2 gap-5 mt-3">
-          
-             <div className="benefitsOfEducation  mt-3">
-               <span className="font-bold text-xl bg-gradient-to-r from-[#003366] to-[#1E3A8A] bg-clip-text text-transparent  sm:text-2xl  lg:text-3xl leading-tight">
-                Benefits of Group Life Insurance
-               </span>
-               <div className="benefitsOfEducationDiv1 flex">
-                
-                {/* <span style={{color:'#FFCC00'}} className="">
-                <TiTick size={30} />
-                </span> */}
-                <span className=" mt-10">
-                   {
-                    benefits.map((item)=>{
-                        return(<div className="flex space-x-3 items-center pr-5 Fundsaremade space-y-7 mt-5 pb-5">
-                            <div className=" ">
-                                         <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-              <span className="text-white text-sm font-bold">✓</span>
-            </div>
+            <div className="max-w-6xl mx-auto px-6 lg:px-12 py-10">
+                <div className="mb-6">
+                    <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 leading-tight">
+                        Benefits of Group Life Insurance
+                    </h2>
                 </div>
-                          <div>  {item}  </div>
-                        </div>)
-                    })                   }
-                </span>
-                
 
-               </div>
-               <div className=" benefitsOfEducationDiv2">
-
-               </div>
-
-             </div>
-             <div>
-                <ContactForm/>
-             </div>
-           
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {benefits.map((benefit, index) => (
+                        <div key={index} className="flex items-start space-x-3">
+                            <div className="w-6 h-6 rounded-full bg-[#003366] flex items-center justify-center flex-shrink-0 mt-1">
+                                <span className="text-white text-sm font-bold">✓</span>
+                            </div>
+                            <p className="text-gray-700 leading-relaxed">
+                                {benefit}
+                            </p>
+                        </div>
+                    ))}
+                </div>
             </div>
-           
         </section>
     )
 

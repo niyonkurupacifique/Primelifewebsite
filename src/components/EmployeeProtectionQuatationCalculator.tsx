@@ -162,14 +162,14 @@ const EmployeeQuotationCalculator: React.FC = () => {
       doc.rect(0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight(), 'F');
     
       // Add company logo
-      const logoImage = 'https://apps.prime.rw/customerportal/images/primelogo.png';
+      const logoImage = './primelogo.png';
       const img = new Image();
       img.src = logoImage;
       const logoWidth = 40;
       const logoHeight = logoWidth * img.naturalHeight / img.naturalWidth;
       const logoX = 15;
       const logoY = 15;
-      doc.addImage('https://apps.prime.rw/customerportal/images/primelogo.png', 'png', 14, 11, 0, 25);
+      doc.addImage('./primelogo.png', 'png', 14, 11, 0, 25);
     
       // Add title
       // Add title with higher contrast
@@ -486,7 +486,7 @@ const EmployeeQuotationCalculator: React.FC = () => {
     
       const signatureX = doc.internal.pageSize.width - 75;
     
-      doc.addImage('https://apps.prime.rw/customerportal/images/stamp.png', 'png', signatureX, doc.internal.pageSize.height - 60, 65, 45);
+      doc.addImage('./stamp.png', 'png', signatureX, doc.internal.pageSize.height - 60, 65, 45);
     
       ////////////////////////////////////////////////////////////
     
@@ -552,7 +552,7 @@ const EmployeeQuotationCalculator: React.FC = () => {
   ];
 
   const formatCurrency = (amount: number): string => {
-    return new Intl.NumberFormat('en-RW', {
+    return new Intl.NumberFormat('rw-RW', {
       style: 'currency',
       currency: 'RWF',
       minimumFractionDigits: 0

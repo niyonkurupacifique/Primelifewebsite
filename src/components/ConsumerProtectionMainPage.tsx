@@ -42,7 +42,7 @@ const ConsumerProtectionMainPage: React.FC = () => {
   const fetchData = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://10.10.1.17:1338/api/consumer-protection-report-managements?populate=File')
+      const response = await fetch('https://primelife.prime.rw:8080/api/consumer-protection-report-managements?populate=File')
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
@@ -81,7 +81,7 @@ const ConsumerProtectionMainPage: React.FC = () => {
 
     // Create socket connection with detailed logging
     console.log('🔌 Initializing Socket.IO connection for Consumer Protection Reports...')
-    const newSocket: Socket = io('http://10.10.1.17:1338', {
+    const newSocket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
       forceNew: true, // Force a new connection
@@ -171,12 +171,12 @@ const ConsumerProtectionMainPage: React.FC = () => {
   }, []) // Empty dependency array
 
   const handleView = (url: string) => {
-    const fullUrl = `http://10.10.1.17:1338${url}`
+    const fullUrl = `https://primelife.prime.rw:8080${url}`
     window.open(fullUrl, '_blank')
   }
 
   const handleDownload = (url: string, filename: string) => {
-    const fullUrl = `http://10.10.1.17:1338${url}`
+    const fullUrl = `https://primelife.prime.rw:8080${url}`
     const link = document.createElement('a')
     link.href = fullUrl
     link.download = filename

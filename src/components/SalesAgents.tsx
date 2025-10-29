@@ -21,41 +21,59 @@ const SalesAgentComponents = () => {
 
   const [query, setQuery] = useState('')
   const [agents, setAgents] = useState<{ id: number; name: string; phone: string; email: string; year: string; quarter: string }[]>([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [totalItems, setTotalItems] = useState(0)
+  const [pageSize, setPageSize] = useState(25)
+  const [loading, setLoading] = useState(false)
 
-  const API_BASE_URL = 'http://10.10.1.17:1338'
+  const API_BASE_URL = 'https://primelife.prime.rw:8080'
 
-  const fetchAgents = async () => {
+  const fetchAgents = async (page = 1) => {
+    setLoading(true)
     try {
-      const res = await fetch(`${API_BASE_URL}/api/sales-agents`)
+      const res = await fetch(`${API_BASE_URL}/api/sales-agents?pagination[page]=${page}&pagination[pageSize]=${pageSize}`)
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const json = await res.json()
+      
+      // Extract data
       const items = Array.isArray(json?.data) ? json.data : []
       const mapped = items.map((item: any) => ({
         id: item.id,
         name: item.AgentName,
         phone: item.Phone,
         email: item.Email,
-        year: item.Year,
+        year: item.Year ? new Date(item.Year).getFullYear().toString() : '',
         quarter: (item.Quarter || '').toUpperCase().trim()
       }))
       setAgents(mapped)
-      const first = items[0]
-      console.log(first)
+      
+      // Extract pagination metadata
+      if (json?.meta?.pagination) {
+        setCurrentPage(json.meta.pagination.page)
+        setTotalPages(json.meta.pagination.pageCount)
+        setTotalItems(json.meta.pagination.total)
+        setPageSize(json.meta.pagination.pageSize)
+      }
+      
+      console.log('Fetched agents:', mapped.length, 'Total:', json?.meta?.pagination?.total)
     } catch (e) {
       console.error('Failed to load sales agents', e)
       setAgents([])
+    } finally {
+      setLoading(false)
     }
   }
 
   useEffect(() => {
-    fetchAgents()
-  }, [])
+    fetchAgents(currentPage)
+  }, [currentPage])
 
   useEffect(() => {
     let socket: Socket | null = null
     try {
       socket = io(API_BASE_URL, { transports: ['websocket'] })
-      const onChange = () => fetchAgents()
+      const onChange = () => fetchAgents(currentPage)
       socket.on('connect', () => {
         // connected
       })
@@ -73,7 +91,7 @@ const SalesAgentComponents = () => {
         socket.disconnect()
       }
     }
-  }, [])
+  }, [currentPage])
 
   const normalized = (value: string) => value.toLowerCase().trim()
 
@@ -86,6 +104,30 @@ const SalesAgentComponents = () => {
       normalized(a.email).includes(q)
     )
   }, [agents, query])
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
+  const renderPageNumbers = () => {
+    const pages = []
+    const maxVisible = 5
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2))
+    let endPage = Math.min(totalPages, startPage + maxVisible - 1)
+    
+    if (endPage - startPage < maxVisible - 1) {
+      startPage = Math.max(1, endPage - maxVisible + 1)
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i)
+    }
+    
+    return pages
+  }
 
   const quarterLabel = (q: string | undefined) => {
     switch (q) {
@@ -129,14 +171,15 @@ const SalesAgentComponents = () => {
               <p className="mt-1 text-gray-600 text-sm sm:text-base">{headerText}</p>
             </div>
 
-            <div className="mb-6 flex items-center gap-3">
+            {/* Search */}
+            <div className="mb-6 space-y-4">
               <div className="relative w-full sm:w-96">
                 <input
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search by name, region, phone, or email"
-                  className="w-full rounded-lg border border-gray-300  px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400  focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  placeholder="Search by name, phone, or email"
+                  className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                   aria-label="Search sales agents"
                 />
                 <svg
@@ -148,6 +191,14 @@ const SalesAgentComponents = () => {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-4.35-4.35m1.1-5.4a6.75 6.75 0 11-13.5 0 6.75 6.75 0 0113.5 0z" />
                 </svg>
+              </div>
+              
+              <div className="flex items-center justify-between text-sm text-gray-600">
+                <span>
+                  Showing {filteredAgents.length} of {totalItems} agents
+                  {currentPage > 1 && ` (Page ${currentPage} of ${totalPages})`}
+                </span>
+                {loading && <span className="text-primary">Loading...</span>}
               </div>
             </div>
 
@@ -210,6 +261,83 @@ const SalesAgentComponents = () => {
                 ))
               )}
             </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="text-sm text-gray-600">
+                  Page {currentPage} of {totalPages}
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  {/* Previous Button */}
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1 || loading}
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    aria-label="Previous page"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-5 w-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  
+                  {/* Page Numbers */}
+                  <div className="hidden sm:flex items-center gap-1">
+                    {currentPage > 3 && (
+                      <>
+                        <button
+                          onClick={() => handlePageChange(1)}
+                          className="rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                          1
+                        </button>
+                        {currentPage > 4 && <span className="px-2 text-gray-500">...</span>}
+                      </>
+                    )}
+                    
+                    {renderPageNumbers().map(page => (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        disabled={loading}
+                        className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
+                          page === currentPage
+                            ? 'bg-primary border-primary text-white'
+                            : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                        } disabled:cursor-not-allowed`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                    
+                    {currentPage < totalPages - 2 && (
+                      <>
+                        {currentPage < totalPages - 3 && <span className="px-2 text-gray-500">...</span>}
+                        <button
+                          onClick={() => handlePageChange(totalPages)}
+                          className="rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                          {totalPages}
+                        </button>
+                      </>
+                    )}
+                  </div>
+                  
+                  {/* Next Button */}
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages || loading}
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    aria-label="Next page"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-5 w-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 

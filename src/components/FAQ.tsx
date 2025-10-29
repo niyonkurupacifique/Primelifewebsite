@@ -55,9 +55,25 @@ const FAQ: React.FC = () => {
     },
     {
       id: 6,
-      question: "How do I calculate the premium for my insurance policy?",
-      answer: "Premium calculation depends on factors such as age, health status, coverage amount, policy term, and product type. You can use our online quotation tools for an instant estimate, or contact our agents for a detailed calculation based on your specific circumstances and needs."
-    }
+      question: "Contract period?",
+      answer: "3 years minimum ."
+    },
+    {
+      id: 7,
+      question: "Advance eligibility ?",
+      answer: " After 3 years on education insurance and 2 years for other products ."
+    },
+    {
+      id: 8,
+      question: "Total surrender eligibility ?",
+      answer: " After 3 years Eligibility: Being 18 - 64 years old Exclusions: Pre-existing disability, spouse murder participation, suicide and other."
+    },
+    {
+      id: 9,
+      question: "Cover territory ?",
+      answer: "World wide."
+    },
+   
   ];
 
   const toggleItem = (id: number) => {
@@ -71,8 +87,8 @@ const FAQ: React.FC = () => {
   const isOpen = (id: number) => openItems.includes(id);
 
   // Split FAQ data into two columns
-  const leftColumn = faqData.slice(0, 3);
-  const rightColumn = faqData.slice(3, 6);
+  const leftColumn = faqData.slice(0, 4);
+  const rightColumn = faqData.slice(4, 9);
 
   return (
     <div className="min-h-screen bg-white">

@@ -56,7 +56,7 @@ const KwishyuraAdvanced: React.FC<KwishyuraAdvancedProps> = ({
   };
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-RW', {
+    return new Intl.NumberFormat('rw-RW', {
       style: 'currency',
       currency: 'RWF',
       minimumFractionDigits: 0,

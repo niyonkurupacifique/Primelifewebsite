@@ -129,7 +129,7 @@ const HandleNavigate=(productName:string)=>{
             <div 
               onClick={() => {HandleNavigate(product.title)}}
               key={product.id}
-              className=" shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105 group"
+              className="  bg-white rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 cursor-pointer hover:scale-105 group"
             >
               {/* Image Container - Reduced height */}
               <div className="h-32 overflow-hidden flex items-center justify-center bg-gray-50">

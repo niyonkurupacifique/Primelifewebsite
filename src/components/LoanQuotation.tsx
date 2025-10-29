@@ -130,7 +130,7 @@ const LoanQuotationCalculator: React.FC = () => {
 
   else{
     try {
-        const result=await fetch(`https://apps.prime.rw/customerbackendtest/api/loan-protection?yearOfBirth=${yearOfBirth}&loanPeriod=${loanPeriod}&premiumFrequency=${premiumFrequency}&loanAmount=${loanAmount}&loanType=${loanType}&isJoint=${isJoint}&coverRetrenchment=${coverRetrenchment}`)
+        const result=await fetch(`https://apps.prime.rw/customerbackend/api/loan-protection?yearOfBirth=${yearOfBirth}&loanPeriod=${loanPeriod}&premiumFrequency=${premiumFrequency}&loanAmount=${loanAmount}&loanType=${loanType}&isJoint=${isJoint}&coverRetrenchment=${coverRetrenchment}`)
         const result2=await result.json()
         // console.log("rate per mille from api:",result2)
         dispatch(SetNetPremium(result2.netPremium))
@@ -163,7 +163,7 @@ const LoanQuotationCalculator: React.FC = () => {
 
 
   const formatCurrency = (amount: number): string => {
-    return new Intl.NumberFormat('en-RW', {
+    return new Intl.NumberFormat('rw-RW', {
       style: 'currency',
       currency: 'RWF',
       minimumFractionDigits: 0

@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { fetchNews, getRecentNews, formatDate } from '../services/newsApi'
 import type { NewsArticle } from '../types/news'
 import { io, Socket } from 'socket.io-client'
+import { getBestImageUrl, getFallbackImageUrl } from '../utils/imageUtils'
 
 const News = () => {
   const router = useRouter()
@@ -31,7 +32,12 @@ const News = () => {
       const allNews = response.data
       console.log("📅 All news articles:", allNews.length)
       
-      const finalNews = allNews.slice(0, 3) // Show only 3 most recent articles
+      // Sort by published date descending (most recent first)
+      const sortedNews = [...allNews].sort((a, b) => {
+        return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      })
+      
+      const finalNews = sortedNews.slice(0, 3) // Show only 3 most recent articles
       console.log("✅ Final news to display:", finalNews.length)
       
       return finalNews
@@ -44,7 +50,7 @@ const News = () => {
   // Socket.IO setup and event listeners
   useEffect(() => {
     // Initialize Socket.IO connection
-    const newSocket = io('http://10.10.1.17:1338', {
+    const newSocket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 20000,
     })
@@ -189,13 +195,17 @@ const News = () => {
             </div>
           ) : (
             newsArticles.map((article) => (
-            <article key={article.id} className=" rounded-lg overflow-hidden shadow-md  hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+            <article onClick={() => router.push(`/news/${article.documentId}`)} key={article.id} className=" rounded-lg overflow-hidden shadow-md  hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
               {/* Article Image */}
               <div className="relative overflow-hidden">
                 <img
-                 src={`${ 'http://10.10.1.17:1338'}${article.MainPicture.url}`}
+                  src={getBestImageUrl(article.MainPicture)}
                   alt={article.MainPicture.alternativeText || article.Title}
                   className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = getFallbackImageUrl();
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>

@@ -89,7 +89,7 @@ const LoginForm = ({
 
     try {
       const response = await axios.post(
-        `https://apps.prime.rw/customerbackendtest/User/send-new-password?username=${formData.phone}`
+        `https://apps.prime.rw/customerbackend/User/send-new-password?username=${formData.phone}`
       )
 
       if (response.data?.message === "Verification Code generated and sent") {
@@ -109,6 +109,20 @@ const LoginForm = ({
     }
   }
 
+  // Function to calculate age from date of birth
+  const calculateAge = (dateOfBirth: string): number => {
+    const birthDate = new Date(dateOfBirth)
+    const today = new Date()
+    let age = today.getFullYear() - birthDate.getFullYear()
+    const monthDiff = today.getMonth() - birthDate.getMonth()
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--
+    }
+    
+    return age
+  }
+
   const handleSubmit = async () => {
     if (!validateForm()) return
 
@@ -120,7 +134,7 @@ const LoginForm = ({
 
     try {
       const response = await axios.post(
-        'https://apps.prime.rw/customerbackendtest/User/api/Authenticate',
+        'https://apps.prime.rw/customerbackend/User/api/Authenticate',
         {
           userName: formData.phone,
           password: formData.otpCode
@@ -130,6 +144,17 @@ const LoginForm = ({
       console.log("response data",response)
 
       if (response.data?.token && response.data?.successMessage) {
+        // Check age restriction before allowing login
+        const userAge = calculateAge(response.data.dateOfBirth)
+        
+        if (userAge >= 62) {
+          // User is 62 or older, deny access
+          const errorMessage = 'Access denied. Users aged 62 and above are not allowed to access this system.'
+          dispatch(setError(errorMessage))
+          setErrors(prev => ({ ...prev, api: errorMessage }))
+          return
+        }
+
         // Prepare user data for Redux
         const userData = {
           id: response.data.id,
