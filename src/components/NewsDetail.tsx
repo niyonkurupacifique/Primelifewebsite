@@ -13,7 +13,7 @@ import { getBestImageUrl, getFallbackImageUrl } from '../utils/imageUtils'
 const NewsDetail = () => {
   const { documentId } = useParams<{ documentId: string }>()
 
-  console.log("document id is",documentId)
+  //console.log("document id is",documentId)
   const router = useRouter()
   const [article, setArticle] = useState<NewsArticle | null>(null)
   const [recentNews, setRecentNews] = useState<NewsArticle[]>([])
@@ -27,7 +27,7 @@ const NewsDetail = () => {
     
     try {
       const response = await fetchNewsById(documentId)
-      console.log("response",response)
+      //console.log("response",response)
       if (response.data) {
         return response.data
       } else {
@@ -66,7 +66,7 @@ const NewsDetail = () => {
     })
 
     newSocket.on('connect', () => {
-      console.log('✅ Connected to Socket.IO server for NewsDetail')
+      //console.log('✅ Connected to Socket.IO server for NewsDetail')
     })
 
     newSocket.on('connect_error', (error) => {
@@ -75,7 +75,7 @@ const NewsDetail = () => {
 
     // Listen for real-time updates
     newSocket.on('News_Management_created', (data) => {
-      console.log('🆕 New news article created:', data)
+      //console.log('🆕 New news article created:', data)
       // Refresh recent news to get the latest data
       fetchRecentNewsData().then(newRecentNews => {
         setRecentNews(newRecentNews)
@@ -83,7 +83,7 @@ const NewsDetail = () => {
     })
 
     newSocket.on('News_Management_updated', (data) => {
-      console.log('🔄 News article updated:', data)
+      //console.log('🔄 News article updated:', data)
       // If the current article was updated, refresh it
       if (data.data && data.data.documentId === documentId) {
         fetchArticleData().then(updatedArticle => {
@@ -99,7 +99,7 @@ const NewsDetail = () => {
     })
 
     newSocket.on('News_Management_deleted', (data) => {
-      console.log('🗑️ News article deleted:', data)
+      //console.log('🗑️ News article deleted:', data)
       // If the current article was deleted, show error
       if (data.data && data.data.documentId === documentId) {
         setError('This article has been deleted')
@@ -136,7 +136,7 @@ const NewsDetail = () => {
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch article')
-        console.error('Error loading article:', err)
+       // console.error('Error loading article:', err)
       } finally {
         setLoading(false)
       }
@@ -147,7 +147,7 @@ const NewsDetail = () => {
         const recentNewsData = await fetchRecentNewsData()
         setRecentNews(recentNewsData)
       } catch (err) {
-        console.error('Error loading recent news:', err)
+       // console.error('Error loading recent news:', err)
       }
     }
 

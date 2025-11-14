@@ -1017,7 +1017,7 @@ const EmployeeQuotationCalculator: React.FC = () => {
                 ) : (
                   <>
                     <Download className="w-5 h-5" />
-                    <span>Download Report</span>
+                    <span>Download Quotation</span>
                   </>
                 )}
               </button>

@@ -52,15 +52,15 @@ const NkunganireFormSlice = createSlice({
       state.contributionYears = action.payload;
     },
     setNkunganireSavingPremium: (state, action: PayloadAction<number>) => {
-      console.log('Debug - Redux: setNkunganireSavingPremium called with:', action.payload);
+      //console.log('Debug - Redux: setNkunganireSavingPremium called with:', action.payload);
       state.savingPremium = action.payload;
     },
     setNkunganireRiskPremium: (state, action: PayloadAction<number>) => {
-      console.log('Debug - Redux: setNkunganireRiskPremium called with:', action.payload);
+      //console.log('Debug - Redux: setNkunganireRiskPremium called with:', action.payload);
       state.riskPremium = action.payload;
     },
     setNkunganireTotalPremium: (state, action: PayloadAction<number>) => {
-      console.log('Debug - Redux: setNkunganireTotalPremium called with:', action.payload);
+      //console.log('Debug - Redux: setNkunganireTotalPremium called with:', action.payload);
       state.totalPremium = action.payload;
     },
     increaseNkunganireSavingPremium: (state, action: PayloadAction<number>) => {

@@ -99,7 +99,7 @@ const YearlyReports: React.FC = () => {
     fetchYearlyReports();
 
     // Create socket connection with detailed logging
-    console.log('🔌 Initializing Socket.IO connection for Yearly Reports...');
+    //console.log('🔌 Initializing Socket.IO connection for Yearly Reports...');
     const newSocket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
@@ -108,7 +108,7 @@ const YearlyReports: React.FC = () => {
 
     // Connection event handlers
     newSocket.on('connect', () => {
-      console.log('✅ Yearly Reports Socket connected successfully:', newSocket.id);
+      //console.log('✅ Yearly Reports Socket connected successfully:', newSocket.id);
     });
 
     newSocket.on('connect_error', (error) => {
@@ -116,49 +116,49 @@ const YearlyReports: React.FC = () => {
     });
 
     newSocket.on('disconnect', (reason) => {
-      console.log('🔌 Yearly Reports Socket disconnected:', reason);
+      //console.log('🔌 Yearly Reports Socket disconnected:', reason);
     });
 
     // Listen for yearly report events with enhanced logging
     newSocket.on('Yearly_Report_created', (data) => {
-      console.log('📥 Yearly_Report_created event received:', data);
+      //console.log('📥 Yearly_Report_created event received:', data);
       // Refetch all data to get the latest reports
       fetchYearlyReports();
     });
 
     newSocket.on('Yearly_Report_updated', (data) => {
-      console.log('📥 Yearly_Report_updated event received:', data);
+      //console.log('📥 Yearly_Report_updated event received:', data);
       // Refetch all data to get the updated reports
       fetchYearlyReports();
     });
 
     newSocket.on('Yearly_Report_deleted', (data) => {
-      console.log('📥 Yearly_Report_deleted event received:', data);
+      //console.log('📥 Yearly_Report_deleted event received:', data);
       // Refetch all data to get the current reports
       fetchYearlyReports();
     });
 
     // Listen for custom yearly reports events
     newSocket.on('Yearly_Reports_queried', (data) => {
-      console.log('📥 Yearly_Reports_queried event received:', data);
+      //console.log('📥 Yearly_Reports_queried event received:', data);
     });
 
     newSocket.on('Yearly_Reports_searched', (data) => {
-      console.log('📥 Yearly_Reports_searched event received:', data);
+      //console.log('📥 Yearly_Reports_searched event received:', data);
     });
 
     newSocket.on('Yearly_Reports_stats_updated', (data) => {
-      console.log('📥 Yearly_Reports_stats_updated event received:', data);
+      //console.log('📥 Yearly_Reports_stats_updated event received:', data);
     });
 
     newSocket.on('Yearly_Reports_broadcast', (data) => {
-      console.log('📥 Yearly_Reports_broadcast event received:', data);
+      //console.log('📥 Yearly_Reports_broadcast event received:', data);
       // You can add a toast notification here if you want
     });
 
     // Listen for any events (debugging)
     newSocket.onAny((eventName, ...args) => {
-      console.log('📡 Yearly Reports received event:', eventName, args);
+      //console.log('📡 Yearly Reports received event:', eventName, args);
     });
 
     // Test connection by sending a ping
@@ -171,7 +171,7 @@ const YearlyReports: React.FC = () => {
 
     // Cleanup function
     return () => {
-      console.log('🧹 Cleaning up Yearly Reports socket connection');
+      //console.log('🧹 Cleaning up Yearly Reports socket connection');
       if (newSocket) {
         newSocket.off('connect');
         newSocket.off('connect_error');

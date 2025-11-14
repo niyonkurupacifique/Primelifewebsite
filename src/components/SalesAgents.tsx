@@ -56,7 +56,7 @@ const SalesAgentComponents = () => {
         setPageSize(json.meta.pagination.pageSize)
       }
       
-      console.log('Fetched agents:', mapped.length, 'Total:', json?.meta?.pagination?.total)
+      //console.log('Fetched agents:', mapped.length, 'Total:', json?.meta?.pagination?.total)
     } catch (e) {
       console.error('Failed to load sales agents', e)
       setAgents([])

@@ -7,16 +7,16 @@ import Footer from './Footer';
 
 const ParentBeneficiariesDemo = () => {
   const handleNext = () => {
-    console.log('Moving to next step');
+    //console.log('Moving to next step');
     alert('Moving to next step!');
   };
 
   const handleSubmit = (data: any) => {
-    console.log('Submitted data:', data);
+    //console.log('Submitted data:', data);
   };
 
   const handleCancel = () => {
-    console.log('Cancelled');
+    //console.log('Cancelled');
     alert('Cancelled!');
   };
 

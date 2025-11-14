@@ -116,7 +116,7 @@ const JobDetailsPage: React.FC = () => {
       setJob(transformedJob)
       setError(null)
     } catch (err) {
-      console.error('Error fetching job data:', err)
+      //console.error('Error fetching job data:', err)
       setError('Failed to load job details. Please try again later.')
     } finally {
       setLoading(false)
@@ -128,7 +128,7 @@ const JobDetailsPage: React.FC = () => {
     fetchJobData()
 
     // Create socket connection with detailed logging
-    console.log('🔌 Initializing Socket.IO connection for Job Management...')
+    //console.log('🔌 Initializing Socket.IO connection for Job Management...')
     const newSocket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
@@ -137,7 +137,7 @@ const JobDetailsPage: React.FC = () => {
 
     // Connection event handlers
     newSocket.on('connect', () => {
-      console.log('✅ Job Management Socket connected successfully:', newSocket.id)
+      //console.log('✅ Job Management Socket connected successfully:', newSocket.id)
     })
 
     newSocket.on('connect_error', (error) => {
@@ -145,33 +145,33 @@ const JobDetailsPage: React.FC = () => {
     })
 
     newSocket.on('disconnect', (reason) => {
-      console.log('🔌 Job Management Socket disconnected:', reason)
+      //console.log('🔌 Job Management Socket disconnected:', reason)
     })
 
     // Listen for job management events with enhanced logging
     newSocket.on('Job_created', (data) => {
-      console.log('📥 Job_created event received:', data)
+      //console.log('📥 Job_created event received:', data)
       // If this is the job we're currently viewing, refresh the data
       if (data.data && data.data.documentId === documentId) {
-        console.log('🔄 Refreshing job data due to creation event')
+        //console.log('🔄 Refreshing job data due to creation event')
         fetchJobData()
       }
     })
 
     newSocket.on('Job_updated', (data) => {
-      console.log('📥 Job_updated event received:', data)
+      //console.log('📥 Job_updated event received:', data)
       // If this is the job we're currently viewing, refresh the data
       if (data.data && data.data.documentId === documentId) {
-        console.log('🔄 Refreshing job data due to update event')
+        //console.log('🔄 Refreshing job data due to update event')
         fetchJobData()
       }
     })
 
     newSocket.on('Job_deleted', (data) => {
-      console.log('📥 Job_deleted event received:', data)
+      //console.log('📥 Job_deleted event received:', data)
       // If this is the job we're currently viewing, show error
       if (data.data && data.data.documentId === documentId) {
-        console.log('🗑️ Current job was deleted')
+        //console.log('🗑️ Current job was deleted')
         setError('This job position has been removed and is no longer available.')
         setJob(null)
       }
@@ -179,25 +179,25 @@ const JobDetailsPage: React.FC = () => {
 
     // Listen for custom job management events
     newSocket.on('Job_Management_queried', (data) => {
-      console.log('📥 Job_Management_queried event received:', data)
+      //console.log('📥 Job_Management_queried event received:', data)
     })
 
     newSocket.on('Job_Management_searched', (data) => {
-      console.log('📥 Job_Management_searched event received:', data)
+      //console.log('📥 Job_Management_searched event received:', data)
     })
 
     newSocket.on('Job_Management_stats_updated', (data) => {
-      console.log('📥 Job_Management_stats_updated event received:', data)
+      //console.log('📥 Job_Management_stats_updated event received:', data)
     })
 
     newSocket.on('Job_Management_broadcast', (data) => {
-      console.log('📥 Job_Management_broadcast event received:', data)
+      //console.log('📥 Job_Management_broadcast event received:', data)
       // You can add a toast notification here if you want
     })
 
     // Listen for any events (debugging)
     newSocket.onAny((eventName, ...args) => {
-      console.log('📡 Job Management received event:', eventName, args)
+      //console.log('📡 Job Management received event:', eventName, args)
     })
 
     // Test connection by sending a ping
@@ -210,7 +210,7 @@ const JobDetailsPage: React.FC = () => {
 
     // Cleanup function
     return () => {
-      console.log('🧹 Cleaning up Job Management socket connection')
+      //console.log('🧹 Cleaning up Job Management socket connection')
       if (newSocket) {
         newSocket.off('connect')
         newSocket.off('connect_error')

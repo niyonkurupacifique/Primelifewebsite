@@ -119,7 +119,12 @@ const BuyInsuranceSavingSteps = () => {
             <div className="flex-1 h-px bg-black mx-2 sm:mx-3 md:mx-4 lg:mx-6"></div>
             <StepIndicator 
               number={2} 
-              label="Umusigire" 
+              label={
+                <span className="flex flex-col sm:flex-row sm:gap-1">
+                  <span>Next of Kin</span>
+                  <span>(Umusigire)</span>
+                </span>
+              } 
               active={step === 2} 
               completed={step > 2}
             />
@@ -146,7 +151,7 @@ const BuyInsuranceSavingSteps = () => {
             <div className="flex-1 h-px bg-black mx-2 sm:mx-3 md:mx-4 lg:mx-6"></div>
             <StepIndicator 
               number={4} 
-              label="Kwishyura" 
+              label="Payment" 
               active={step === 4} 
               completed={false}
             />
@@ -201,7 +206,7 @@ export default BuyInsuranceSavingSteps
 
 type StepIndicatorProps = {
   number: number
-  label: string
+  label: React.ReactNode
   active: boolean
   completed?: boolean
 }

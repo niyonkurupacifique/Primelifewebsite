@@ -332,7 +332,8 @@ const Umusigire: React.FC<UmusigireProps> = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-4 space-y-3 sm:space-y-0 pt-6 border-t border-gray-200">
+
             <button
               type="button"
               onClick={handleReset}

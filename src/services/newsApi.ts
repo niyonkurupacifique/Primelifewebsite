@@ -19,7 +19,7 @@ export const fetchNews = async (): Promise<NewsApiResponse> => {
 }
 
 export const fetchNewsById = async (documentId: string): Promise<SingleNewsApiResponse> => {
-  console.log(`api i am calling ${API_BASE_URL}/news-managements/${documentId}?populate=*`)
+  //console.log(`api i am calling ${API_BASE_URL}/news-managements/${documentId}?populate=*`)
   try {
     const response = await fetch(`${API_BASE_URL}/news-managements/${documentId}?populate=*`)
     

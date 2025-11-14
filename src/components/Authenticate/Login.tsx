@@ -141,7 +141,7 @@ const LoginForm = ({
         }
       )
 
-      console.log("response data",response)
+      //console.log("response data",response)
 
       if (response.data?.token && response.data?.successMessage) {
         // Check age restriction before allowing login
@@ -225,7 +225,7 @@ const LoginForm = ({
               value={formData.phone}
               onChange={handleInputChange}
               disabled={otpSent}
-              className={`flex-1 px-4 py-2 border border-slate-300 rounded-lg transition-colors focus:outline-none focus:ring-0 ${
+              className={`flex-1  md:px-4 py-2 border border-slate-300 rounded-lg transition-colors focus:outline-none focus:ring-0 ${
                 errors.phone
                   ? 'border-red-300 focus:border-red-500'
                   : 'border-gray-200 focus:border-[#00B0EF] hover:border-gray-300'
@@ -308,7 +308,7 @@ const LoginForm = ({
                 type="text"
                 value={formData.otpCode}
                 onChange={handleInputChange}
-                className={`flex-1 px-4 py-2 border border-slate-300 rounded-lg transition-colors focus:outline-none focus:ring-0 ${
+                className={`flex-1 md:px-4 py-2 border border-slate-300 rounded-lg transition-colors focus:outline-none focus:ring-0 ${
                   errors.otpCode
                     ? 'border-red-300 focus:border-red-500'
                     : 'border-gray-200 focus:border-[#00B0EF] hover:border-gray-300'

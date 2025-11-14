@@ -19,7 +19,7 @@ const AuthenticateChoice = ({ onAuthenticated }: { onAuthenticated: () => void }
     const dispatch = useAppDispatch()
 
     // Debug: log current substep
-    console.log('AuthenticateChoice - Current subStep:', subStep)
+    //console.log('AuthenticateChoice - Current subStep:', subStep)
 
 
     const handleAccountSelection = (value: boolean) => {
@@ -41,21 +41,21 @@ const AuthenticateChoice = ({ onAuthenticated }: { onAuthenticated: () => void }
     const handleRegisterSuccess = (userData?: any) => {
         // If registration was successful and we have user data
         if (userData) {
-            console.log('Registration successful, redirecting to OTP verification:', userData)
+            //console.log('Registration successful, redirecting to OTP verification:', userData)
             
             // Store user data locally as fallback
             setCurrentUserData(userData)
             
             // Redirect to OTP verification step
-            console.log('Setting subStep to otpVerification')
+            //console.log('Setting subStep to otpVerification')
             setSubStep('otpVerification')
         } else {
-            console.log('handleRegisterSuccess called but no userData provided')
+            //console.log('handleRegisterSuccess called but no userData provided')
         }
     }
 
     const handleOTPVerificationSuccess = () => {
-        console.log('OTP verification successful, showing login with success message')
+        //console.log('OTP verification successful, showing login with success message')
         
         // Show success message and redirect to login
         setShowRegistrationSuccess(true)

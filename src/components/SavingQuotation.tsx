@@ -471,7 +471,7 @@ const handleDownloadPDF = () => {
 };
 
   const HandleCalculateQuotation = async () => {
-    console.log("sum assured we are using",SumAssured)
+    //console.log("sum assured we are using",SumAssured)
     setIncompleteFields([]);
     setIsCalculating(true);
     
@@ -510,7 +510,7 @@ const handleDownloadPDF = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("results is",result)
+        //console.log("results is",result)
         dispatch(SetValueAcquiredAtMaturity(result.currentFundValue));
         // dispatch(SetSumAssured(result.sumAssured));
         dispatch(SetQuotationId(result.quotationId));
@@ -649,7 +649,7 @@ const handleDownloadPDF = () => {
                   <option value={0} className="text-black">Select Contribution Years</option>
                   {contributionYear.map((year) => (
                     <option key={year} value={year} className="text-black">
-                      {year} years
+                      {year}
                     </option>
                   ))}
                 </select>
@@ -765,10 +765,10 @@ const handleDownloadPDF = () => {
                     <span className="text-white/80">Contribution Years:</span>
                     <span className="text-white font-medium">{ContributionYears} years</span>
                   </div>
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <span className="text-white/80">Interest Rate:</span>
                     <span className="text-white font-medium">{InterestRate}%</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

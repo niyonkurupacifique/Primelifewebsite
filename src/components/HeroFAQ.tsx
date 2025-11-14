@@ -10,7 +10,7 @@ const HeroFAQS = () => {
     {
       id: 1,
       title: "FAQs",
-      subtitle: "How can we help you?",
+      subtitle: "Prime Life Insurance Ltd – Frequently Asked Questions (FAQs)",
       image: "./faq-banner.jpg",
     },
   ]

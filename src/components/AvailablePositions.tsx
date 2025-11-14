@@ -64,7 +64,7 @@ const AvailablePositions: React.FC = () => {
     fetchJobs()
 
     // Create socket connection with detailed logging
-    console.log('🔌 Initializing Socket.IO connection for Available Positions...')
+    //console.log('🔌 Initializing Socket.IO connection for Available Positions...')
     const newSocket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
@@ -73,7 +73,7 @@ const AvailablePositions: React.FC = () => {
 
     // Connection event handlers
     newSocket.on('connect', () => {
-      console.log('✅ Available Positions Socket connected successfully:', newSocket.id)
+      //console.log('✅ Available Positions Socket connected successfully:', newSocket.id)
     })
 
     newSocket.on('connect_error', (error) => {
@@ -81,52 +81,52 @@ const AvailablePositions: React.FC = () => {
     })
 
     newSocket.on('disconnect', (reason) => {
-      console.log('🔌 Available Positions Socket disconnected:', reason)
+      //console.log('🔌 Available Positions Socket disconnected:', reason)
     })
 
     // Listen for job management events with enhanced logging
     newSocket.on('Job_created', (data) => {
-      console.log('📥 Job_created event received:', data)
+      //console.log('📥 Job_created event received:', data)
       // Refetch all jobs to get the latest data
-      console.log('🔄 Refreshing jobs data due to creation event')
+      //console.log('🔄 Refreshing jobs data due to creation event')
       fetchJobs()
     })
 
     newSocket.on('Job_updated', (data) => {
-      console.log('📥 Job_updated event received:', data)
+      //console.log('📥 Job_updated event received:', data)
       // Refetch all jobs to get the updated data
-      console.log('🔄 Refreshing jobs data due to update event')
+      //console.log('🔄 Refreshing jobs data due to update event')
       fetchJobs()
     })
 
     newSocket.on('Job_deleted', (data) => {
-      console.log('📥 Job_deleted event received:', data)
+      //console.log('📥 Job_deleted event received:', data)
       // Refetch all jobs to get the current data
-      console.log('🔄 Refreshing jobs data due to deletion event')
+      //console.log('🔄 Refreshing jobs data due to deletion event')
       fetchJobs()
     })
 
     // Listen for custom job management events
     newSocket.on('Job_Management_queried', (data) => {
-      console.log('📥 Job_Management_queried event received:', data)
+      //console.log('📥 Job_Management_queried event received:', data)
     })
 
     newSocket.on('Job_Management_searched', (data) => {
-      console.log('📥 Job_Management_searched event received:', data)
+      //console.log('📥 Job_Management_searched event received:', data)
     })
 
     newSocket.on('Job_Management_stats_updated', (data) => {
-      console.log('📥 Job_Management_stats_updated event received:', data)
+      //console.log('📥 Job_Management_stats_updated event received:', data)
     })
 
     newSocket.on('Job_Management_broadcast', (data) => {
-      console.log('📥 Job_Management_broadcast event received:', data)
+      //console.log('📥 Job_Management_broadcast event received:', data)
       // You can add a toast notification here if you want
     })
 
     // Listen for any events (debugging)
     newSocket.onAny((eventName, ...args) => {
-      console.log('📡 Available Positions received event:', eventName, args)
+      //console.log('📡 Available Positions received event:', eventName, args)
     })
 
     // Test connection by sending a ping
@@ -139,7 +139,7 @@ const AvailablePositions: React.FC = () => {
 
     // Cleanup function
     return () => {
-      console.log('🧹 Cleaning up Available Positions socket connection')
+      //console.log('🧹 Cleaning up Available Positions socket connection')
       if (newSocket) {
         newSocket.off('connect')
         newSocket.off('connect_error')

@@ -89,10 +89,10 @@ const dispatch = useAppDispatch()
 const showValuesModal = useAppSelector((state) => state.valuesModal.showValuesModal)
 
  if(showValuesModal){
-  console.log("show modal state is true ")
+  //console.log("show modal state is true ")
  }
  else {
-   console.log("show modal state is false ")
+   //console.log("show modal state is false ")
  }
  
 

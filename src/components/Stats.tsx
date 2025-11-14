@@ -24,12 +24,12 @@ const Stats = () => {
     TurnAroundTime: 1
   })
 
-  console.log("numberOfPoliciesRecorded", numberOfPoliciesRecorded)
+  //console.log("numberOfPoliciesRecorded", numberOfPoliciesRecorded)
 
   const fetchUsers = async () => {
     try {
       const response = await axios.get<Statistics>('https://apps.prime.rw/customerbackend/api/statistics/counts');
-      console.log("response we have is", response)
+      //console.log("response we have is", response)
 
       // Only update if the values have actually changed
       if (response.data.numberOfClaims !== numberOfClaimsRecorded ||

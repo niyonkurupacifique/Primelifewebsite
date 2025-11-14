@@ -45,7 +45,7 @@ const AllNews = () => {
     })
 
     newSocket.on('connect', () => {
-      console.log('✅ Connected to Socket.IO server for AllNews')
+      //console.log('✅ Connected to Socket.IO server for AllNews')
     })
 
     newSocket.on('connect_error', (error) => {
@@ -54,7 +54,7 @@ const AllNews = () => {
 
     // Listen for real-time updates
     newSocket.on('News_Management_created', (data) => {
-      console.log('🆕 New news article created:', data)
+      //console.log('🆕 New news article created:', data)
       // Refresh news to get the latest data
       fetchNewsData().then(newNews => {
         setNewsArticles(newNews)
@@ -63,7 +63,7 @@ const AllNews = () => {
     })
 
     newSocket.on('News_Management_updated', (data) => {
-      console.log('🔄 News article updated:', data)
+      //console.log('🔄 News article updated:', data)
       // Refresh news to get the latest data
       fetchNewsData().then(newNews => {
         setNewsArticles(newNews)
@@ -72,7 +72,7 @@ const AllNews = () => {
     })
 
     newSocket.on('News_Management_deleted', (data) => {
-      console.log('🗑️ News article deleted:', data)
+      //console.log('🗑️ News article deleted:', data)
       // Refresh news to get the latest data
       fetchNewsData().then(newNews => {
         setNewsArticles(newNews)

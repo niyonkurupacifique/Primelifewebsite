@@ -4,6 +4,7 @@ import Footer from "../Footer"
 import BenefitsOfUmurageWamashuri from "../BenefitsOfUmurageWamashuri"
 import UmurageWamashuriFeatures from "../UmurageWamashuriFeatures"
 
+
 const UmurageWamashuri=()=>{
     return(
         <>

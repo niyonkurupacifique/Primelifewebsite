@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from "react";
+import Turnstile from "react-turnstile";
 
 const ComplaintsForm: React.FC = () => {
   const formTopRef = useRef<HTMLFormElement>(null);
@@ -8,7 +9,7 @@ const ComplaintsForm: React.FC = () => {
     fullName: "",
     email: "",
     phone: "",
-    agree: false,
+    agree: true,
     isCustomer: "",
     products: "",
     message: ""
@@ -18,6 +19,7 @@ const ComplaintsForm: React.FC = () => {
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -47,6 +49,11 @@ const ComplaintsForm: React.FC = () => {
 
     if (!formData.agree) {
       setSubmitStatus({ type: 'error', message: 'Please agree to the terms of use' });
+      return;
+    }
+
+    if (!turnstileToken) {
+      setSubmitStatus({ type: 'error', message: 'Please verify that you are human' });
       return;
     }
 
@@ -91,7 +98,7 @@ ${formData.fullName}
       };
 
       const API_URL = 'https://apps.prime.rw/onlineservicesapi/DigitalServices/sendEmailNotification';
-      console.log('📤 Sending complaint email via API:', API_URL);
+      //console.log('📤 Sending complaint email via API:', API_URL);
       
       const response = await fetch(API_URL, {
         method: 'POST',
@@ -101,9 +108,9 @@ ${formData.fullName}
         body: JSON.stringify(requestBody),
       });
 
-      console.log('📥 Response status:', response.status);
+      //console.log('📥 Response status:', response.status);
       const responseData = await response.json();
-      console.log('📥 Response data:', responseData);
+      //console.log('📥 Response data:', responseData);
 
       // Check if request was successful
       if (response.ok) {
@@ -269,7 +276,7 @@ ${formData.fullName}
       </div>
 
       {/* Agree to terms */}
-      <div className="flex items-start space-x-2 mt-4">
+     {/*  <div className="flex items-start space-x-2 mt-4">
         <input
           type="checkbox"
           name="agree"
@@ -281,6 +288,16 @@ ${formData.fullName}
         <label className="text-sm text-gray-700">
           I agree to Prime Life Insurance's terms of use <span className="text-red-500">*</span>
         </label>
+      </div> */}
+
+      {/* Turnstile */}
+      <div className="mt-4">
+        <Turnstile
+          sitekey="0x4AAAAAAB9p-vWv0lDZusVA"
+          onSuccess={setTurnstileToken}
+          onError={() => setTurnstileToken(null)}
+          onExpire={() => setTurnstileToken(null)}
+        />
       </div>
 
       {/* Submit button */}

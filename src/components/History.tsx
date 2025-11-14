@@ -7,12 +7,12 @@ const HistorySection = () => {
     {
       year: "2011",
       title: "Company Establishment",
-      description: "Prime Life Assurance Ltd was established in December 2011 by COGEAR Ltd"
+      description: "Prime Life Insurance Ltd was established in December 2011 by COGEAR Ltd"
     },
     {
       year: "2012",
       title: "Regulatory Licensing",
-      description: "In May 2012, Prime Life Assurance Ltd obtained a license from the National Bank of Rwanda to offer life insurance services."
+      description: "In May 2012, Prime Life Insurance Ltd obtained a license from the National Bank of Rwanda to offer life insurance services."
     },
     {
       year: "",
@@ -92,7 +92,7 @@ const HistorySection = () => {
                   Our Foundation
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-6">
-                  Prime Life Assurance Ltd was established in December 2011 by COGEAR Ltd to comply with regulatory
+                  Prime Life Insurance Ltd was established in December 2011 by COGEAR Ltd to comply with regulatory
                   directives mandating the separation of short-term and long-term insurance policies. In May 2012, Prime
                   Life Assurance Ltd obtained a license from the National Bank of Rwanda to offer life insurance services.
                 </p>

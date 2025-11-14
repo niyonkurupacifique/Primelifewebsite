@@ -80,7 +80,7 @@ const ConsumerProtectionMainPage: React.FC = () => {
     fetchData()
 
     // Create socket connection with detailed logging
-    console.log('🔌 Initializing Socket.IO connection for Consumer Protection Reports...')
+    //console.log('🔌 Initializing Socket.IO connection for Consumer Protection Reports...')
     const newSocket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
@@ -89,7 +89,7 @@ const ConsumerProtectionMainPage: React.FC = () => {
 
     // Connection event handlers
     newSocket.on('connect', () => {
-      console.log('✅ Consumer Protection Reports Socket connected successfully:', newSocket.id)
+      //console.log('✅ Consumer Protection Reports Socket connected successfully:', newSocket.id)
     })
 
     newSocket.on('connect_error', (error) => {
@@ -97,49 +97,49 @@ const ConsumerProtectionMainPage: React.FC = () => {
     })
 
     newSocket.on('disconnect', (reason) => {
-      console.log('🔌 Consumer Protection Reports Socket disconnected:', reason)
+      //console.log('🔌 Consumer Protection Reports Socket disconnected:', reason)
     })
 
     // Listen for consumer protection report events with enhanced logging
     newSocket.on('Consumer_Protection_Report_created', (data) => {
-      console.log('📥 Consumer_Protection_Report_created event received:', data)
+      //console.log('📥 Consumer_Protection_Report_created event received:', data)
       // Refetch all data to get the latest reports
       fetchData()
     })
 
     newSocket.on('Consumer_Protection_Report_updated', (data) => {
-      console.log('📥 Consumer_Protection_Report_updated event received:', data)
+      //console.log('📥 Consumer_Protection_Report_updated event received:', data)
       // Refetch all data to get the updated reports
       fetchData()
     })
 
     newSocket.on('Consumer_Protection_Report_deleted', (data) => {
-      console.log('📥 Consumer_Protection_Report_deleted event received:', data)
+      //console.log('📥 Consumer_Protection_Report_deleted event received:', data)
       // Refetch all data to get the current reports
       fetchData()
     })
 
     // Listen for custom consumer protection events
     newSocket.on('Consumer_Protection_Reports_queried', (data) => {
-      console.log('📥 Consumer_Protection_Reports_queried event received:', data)
+      //console.log('📥 Consumer_Protection_Reports_queried event received:', data)
     })
 
     newSocket.on('Consumer_Protection_Reports_searched', (data) => {
-      console.log('📥 Consumer_Protection_Reports_searched event received:', data)
+      //console.log('📥 Consumer_Protection_Reports_searched event received:', data)
     })
 
     newSocket.on('Consumer_Protection_Reports_stats_updated', (data) => {
-      console.log('📥 Consumer_Protection_Reports_stats_updated event received:', data)
+      //console.log('📥 Consumer_Protection_Reports_stats_updated event received:', data)
     })
 
     newSocket.on('Consumer_Protection_broadcast', (data) => {
-      console.log('📥 Consumer_Protection_broadcast event received:', data)
+      //console.log('📥 Consumer_Protection_broadcast event received:', data)
       // You can add a toast notification here if you want
     })
 
     // Listen for any events (debugging)
     newSocket.onAny((eventName, ...args) => {
-      console.log('📡 Consumer Protection Reports received event:', eventName, args)
+      //console.log('📡 Consumer Protection Reports received event:', eventName, args)
     })
 
     // Test connection by sending a ping
@@ -152,7 +152,7 @@ const ConsumerProtectionMainPage: React.FC = () => {
 
     // Cleanup function
     return () => {
-      console.log('🧹 Cleaning up Consumer Protection Reports socket connection')
+      //console.log('🧹 Cleaning up Consumer Protection Reports socket connection')
       if (newSocket) {
         newSocket.off('connect')
         newSocket.off('connect_error')

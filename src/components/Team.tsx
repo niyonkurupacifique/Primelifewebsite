@@ -177,7 +177,7 @@ const Team = () => {
     fetchTeamMembers()
 
     // Create socket connection with detailed logging
-    console.log('🔌 Initializing Socket.IO connection...')
+    //console.log('🔌 Initializing Socket.IO connection...')
     const socket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
@@ -186,7 +186,7 @@ const Team = () => {
 
     // Connection event handlers
     socket.on('connect', () => {
-      console.log('✅ Socket connected successfully:', socket.id)
+      //console.log('✅ Socket connected successfully:', socket.id)
     })
 
     socket.on('connect_error', (error) => {
@@ -194,28 +194,28 @@ const Team = () => {
     })
 
     socket.on('disconnect', (reason) => {
-      console.log('🔌 Socket disconnected:', reason)
+      //console.log('🔌 Socket disconnected:', reason)
     })
 
     // Listen for board member events with enhanced logging
     socket.on('board_created', (data) => {
-      console.log('📥 Board member created event received:', data)
+      //console.log('📥 Board member created event received:', data)
       fetchTeamMembers() // Refetch all data
     })
 
     socket.on('board_updated', (data) => {
-      console.log('📥 Board member updated event received:', data)
+      //console.log('📥 Board member updated event received:', data)
       fetchTeamMembers() // Refetch all data
     })
 
     socket.on('board_deleted', (data) => {
-      console.log('📥 Board member deleted event received:', data)
+      //console.log('📥 Board member deleted event received:', data)
       fetchTeamMembers() // Refetch all data
     })
 
     // Listen for any events (debugging)
     socket.onAny((eventName, ...args) => {
-      console.log('📡 Received event:', eventName, args)
+      //console.log('📡 Received event:', eventName, args)
     })
 
     // Test connection by sending a ping
@@ -225,7 +225,7 @@ const Team = () => {
 
     // Cleanup function
     return () => {
-      console.log('🧹 Cleaning up socket connection')
+      //console.log('🧹 Cleaning up socket connection')
       socket.off('connect')
       socket.off('connect_error')
       socket.off('disconnect')
@@ -314,7 +314,7 @@ const Team = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-primary leading-tight max-w-3xl mx-auto">
-            Meet the Prime Insurance team:
+            Meet the Prime Life Insurance team:
           </h2>
           <h2 className="text-4xl lg:text-5xl font-bold text-primary leading-tight max-w-3xl mx-auto">
             Board of Directors

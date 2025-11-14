@@ -84,7 +84,7 @@ const [CycleArray, setCycleArray] = useState([
   const PremiumFrequency = useAppSelector((state) => state.EducationQuotationformdata.PremiumFrequency);
   const Cycle = useAppSelector((state) => state.EducationQuotationformdata.Cycle);
  
-   console.log("cycle we have",Cycle)
+   //console.log("cycle we have",Cycle)
 
   // ✅ Result data from EducationQuotationResult
  const Endowmentamountafterdeferredperiod = useAppSelector(state => state.EducationQuotationResult.Endowmentamountafterdeferredperiod);
@@ -97,7 +97,7 @@ const [CycleArray, setCycleArray] = useState([
   const [message, setMessage] = useState<string>('');
   const [messageType, setMessageType] = useState<'success' | 'error' | ''>('');
   
-   console.log("incompleteFields",incompleteFields)
+   //console.log("incompleteFields",incompleteFields)
 
   const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat('rw-RW', {

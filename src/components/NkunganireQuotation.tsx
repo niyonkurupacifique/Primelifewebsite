@@ -457,7 +457,7 @@ const NkunganireQuotationCalculator: React.FC = () => {
       }, 3000);
       
     } catch (error) {
-      console.error('Error generating PDF:', error);
+     // console.error('Error generating PDF:', error);
       setIsDownloading(false);
       setMessage('Error generating PDF. Please try again.');
       setMessageType('error');
@@ -496,12 +496,12 @@ const NkunganireQuotationCalculator: React.FC = () => {
   // Function to handle custom saving premium input
   const handleCustomSavingPremium = (value: string) => {
     const numValue = parseFloat(value) || 0;
-    console.log('Debug - Input value:', value);
-    console.log('Debug - Parsed number:', numValue);
+    //console.log('Debug - Input value:', value);
+    //console.log('Debug - Parsed number:', numValue);
     const finalValue = Math.max(0, numValue);
-    console.log('Debug - Final saving premium value:', finalValue);
-    console.log('Debug - Current risk premium:', riskPremium);
-    console.log('Debug - Expected total premium:', finalValue + riskPremium);
+    //console.log('Debug - Final saving premium value:', finalValue);
+    //console.log('Debug - Current risk premium:', riskPremium);
+    //console.log('Debug - Expected total premium:', finalValue + riskPremium);
     
     // Update local state first
     setLocalSavingPremium(finalValue);
@@ -538,12 +538,12 @@ const NkunganireQuotationCalculator: React.FC = () => {
 
   // Update total premium whenever risk premium changes (but not saving premium to avoid conflicts)
   useEffect(() => {
-    console.log('Debug - useEffect triggered with:', { riskPremium, savingPremium });
-    console.log('Debug - useEffect execution timestamp:', new Date().toISOString());
+    //console.log('Debug - useEffect triggered with:', { riskPremium, savingPremium });
+    //console.log('Debug - useEffect execution timestamp:', new Date().toISOString());
     const newTotalPremium = Math.round((riskPremium + savingPremium) * 100) / 100; // Round to 2 decimal places
-    console.log('Debug - Risk Premium:', riskPremium);
-    console.log('Debug - Saving Premium:', savingPremium);
-    console.log('Debug - Calculated Total Premium:', newTotalPremium);
+    //console.log('Debug - Risk Premium:', riskPremium);
+    //console.log('Debug - Saving Premium:', savingPremium);
+    //console.log('Debug - Calculated Total Premium:', newTotalPremium);
     
     setTotalPremium(newTotalPremium);
     
@@ -554,14 +554,14 @@ const NkunganireQuotationCalculator: React.FC = () => {
 
   // Remove the sync useEffect that causes circular dependency
   // useEffect(() => {
-  //   console.log('Debug - Syncing local state with Redux. Redux value:', savingPremium, 'Local value:', localSavingPremium);
-  //   console.log('Debug - Sync useEffect execution timestamp:', new Date().toISOString());
+  //   //console.log('Debug - Syncing local state with Redux. Redux value:', savingPremium, 'Local value:', localSavingPremium);
+  //   //console.log('Debug - Sync useEffect execution timestamp:', new Date().toISOString());
   //   setLocalSavingPremium(savingPremium);
   // }, [savingPremium]);
 
   // Reset results when form fields change
   useEffect(() => {
-    console.log('Debug - Resetting form fields');
+    //console.log('Debug - Resetting form fields');
     setRiskPremium(0);
     setTotalPremium(0);
     setLocalSavingPremium(0);
@@ -594,10 +594,10 @@ const NkunganireQuotationCalculator: React.FC = () => {
 
   try {
     const selected = data.find((item) => item.categoryType === category);
-    console.log("seleted category",selected)
+    //console.log("seleted category",selected)
     if (!selected) return;
 
-    console.log("test cover ",selected.spouseSumInsured)
+    //console.log("test cover ",selected.spouseSumInsured)
     
     // Dispatch to Redux
     dispatch(setNkunganirePolicyHolder(selected.policyholderSumInsured || 0));
@@ -642,37 +642,37 @@ const NkunganireQuotationCalculator: React.FC = () => {
     const monthlyRisk = monthlyPremium + (extraKids * monthlyAddPremium) + (monthlyAddPmParent);
     const annualRisk = annualyPremium + (extraKids * annualyAddPremium) + (monthlyAddPmParent * 12 );
 
-    console.log('Debug - Base Premium (Monthly):', monthlyPremium);
-    console.log('Debug - Base Premium (Annual):', annualyPremium);
-    console.log('Debug - Extra Kids:', extraKids);
-    console.log('Debug - Monthly Add Premium per Kid:', monthlyAddPremium);
-    console.log('Debug - Annual Add Premium per Kid:', annualyAddPremium);
-    console.log('Debug - Parent Count:', parentCount);
-    console.log('Debug - Monthly Add Premium per Parent:', monthlyAddPmParent);
-    console.log('Debug - Calculated Monthly Risk:', monthlyRisk);
-    console.log('Debug - Calculated Annual Risk:', annualRisk);
+    //console.log('Debug - Base Premium (Monthly):', monthlyPremium);
+    //console.log('Debug - Base Premium (Annual):', annualyPremium);
+    //console.log('Debug - Extra Kids:', extraKids);
+    //console.log('Debug - Monthly Add Premium per Kid:', monthlyAddPremium);
+    //console.log('Debug - Annual Add Premium per Kid:', annualyAddPremium);
+    //console.log('Debug - Parent Count:', parentCount);
+    //console.log('Debug - Monthly Add Premium per Parent:', monthlyAddPmParent);
+    //console.log('Debug - Calculated Monthly Risk:', monthlyRisk);
+    //console.log('Debug - Calculated Annual Risk:', annualRisk);
 
     // Set results
     const calculatedRiskPremium = premiumFrequency === 'Monthly' ? monthlyRisk : annualRisk;
-    console.log('Debug - Final Risk Premium:', calculatedRiskPremium);
+    //console.log('Debug - Final Risk Premium:', calculatedRiskPremium);
     
     // Ensure risk premium is not negative
     const finalRiskPremium = Math.max(0, calculatedRiskPremium);
-    console.log('Debug - Final Risk Premium (after validation):', finalRiskPremium);
+    //console.log('Debug - Final Risk Premium (after validation):', finalRiskPremium);
     
     setRiskPremium(finalRiskPremium);
     
     // Set initial saving premium if it's 0 (first calculation)
     if (savingPremium === 0 && localSavingPremium === 0) {
       const initialSavingPremium = premiumFrequency === 'Monthly' ? monthlyMinSavings : annualyMinSavings;
-      console.log('Debug - Setting initial saving premium:', initialSavingPremium);
-      console.log('Debug - Monthly min savings:', monthlyMinSavings);
-      console.log('Debug - Annual min savings:', annualyMinSavings);
-      console.log('Debug - Premium frequency:', premiumFrequency);
+      //console.log('Debug - Setting initial saving premium:', initialSavingPremium);
+      //console.log('Debug - Monthly min savings:', monthlyMinSavings);
+      //console.log('Debug - Annual min savings:', annualyMinSavings);
+      //console.log('Debug - Premium frequency:', premiumFrequency);
       setLocalSavingPremium(initialSavingPremium);
       dispatch(setNkunganireSavingPremium(initialSavingPremium));
     } else {
-      console.log('Debug - User has already set saving premium:', savingPremium, 'Local:', localSavingPremium);
+      //console.log('Debug - User has already set saving premium:', savingPremium, 'Local:', localSavingPremium);
     }
 
     // Total premium will be updated by useEffect
@@ -845,7 +845,7 @@ const NkunganireQuotationCalculator: React.FC = () => {
                     <option value="" className="text-black">Select Years</option>
                     {contributionYearsOptions.map((year) => (
                       <option key={year} value={year} className="text-black">
-                        {year} {year === '1' ? 'Year' : 'Years'}
+                        {year} 
                       </option>
                     ))}
                   </select>
@@ -962,7 +962,7 @@ const NkunganireQuotationCalculator: React.FC = () => {
                 ) : (
                   <>
                     <Download className="w-5 h-5" />
-                    <span>Download Report</span>
+                    <span>Download Quotation</span>
                   </>
                 )}
               </button>

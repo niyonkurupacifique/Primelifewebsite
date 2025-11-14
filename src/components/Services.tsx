@@ -7,7 +7,7 @@ const Services = () => {
   
 const router=useRouter()
 const HandleNavigate=(productName:string)=>{
-  console.log("product name is",productName)
+  //console.log("product name is",productName)
   switch(productName){
     case 'Education':
       router.push('/education')

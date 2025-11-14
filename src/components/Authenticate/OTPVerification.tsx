@@ -23,9 +23,9 @@ const OTPVerification = ({ onVerificationSuccess, onBackToLogin, userData }: OTP
   // Use Redux data if available, otherwise use passed userData
   const currentData = registrationData || userData
 
-  console.log('OTP Verification - registrationData:', registrationData)
-  console.log('OTP Verification - userData prop:', userData)
-  console.log('OTP Verification - currentData:', currentData)
+  //console.log('OTP Verification - registrationData:', registrationData)
+  //console.log('OTP Verification - userData prop:', userData)
+  //console.log('OTP Verification - currentData:', currentData)
 
   // Countdown timer for resend button
   useEffect(() => {

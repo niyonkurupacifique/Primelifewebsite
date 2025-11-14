@@ -82,33 +82,33 @@ const Beneficiaries: React.FC<BeneficiariesProps> = ({
   const validateForm = (): boolean => {
     const newErrors: Partial<BeneficiaryFormData> = {};
 
-    if (!formData.nationalId.trim()) {
-      newErrors.nationalId = 'National ID is required';
-    }
+    // if (!formData.nationalId.trim()) {
+    //   newErrors.nationalId = 'National ID is required';
+    // }
 
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First name is required';
-    }
+    // if (!formData.firstName.trim()) {
+    //   newErrors.firstName = 'First name is required';
+    // }
 
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last name is required';
-    }
+    // if (!formData.lastName.trim()) {
+    //   newErrors.lastName = 'Last name is required';
+    // }
 
-    if (!formData.dateOfBirth) {
-      newErrors.dateOfBirth = 'Date of birth is required';
-    }
+    // if (!formData.dateOfBirth) {
+    //   newErrors.dateOfBirth = 'Date of birth is required';
+    // }
 
-    if (!formData.gender) {
-      newErrors.gender = 'Gender is required';
-    }
+    // if (!formData.gender) {
+    //   newErrors.gender = 'Gender is required';
+    // }
 
-    if (!formData.relationship) {
-      newErrors.relationship = 'Relationship is required';
-    }
+    // if (!formData.relationship) {
+    //   newErrors.relationship = 'Relationship is required';
+    // }
 
-    if (!formData.phoneNumber.trim()) {
-      newErrors.phoneNumber = 'Phone number is required';
-    }
+    // if (!formData.phoneNumber.trim()) {
+    //   newErrors.phoneNumber = 'Phone number is required';
+    // }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

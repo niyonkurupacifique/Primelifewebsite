@@ -1,0 +1,84 @@
+'use client';
+
+import React from 'react';
+
+const IkiminaContractFormat = () => {
+  const contractFile = '/Ikimina_Policy_KINYA_Terms__Conditions (1).pdf';
+
+  return (
+    <div className="max-w-6xl mx-auto p-6">
+      <div className="text-center mb-12">
+        <h1  className="text-3xl font-bold text-[#00AFF3] mb-4">Documents:</h1>
+        <div className="w-32 h-1 bg-yellow-400 mx-auto rounded-full"></div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Standing Order Column */}
+        <div className="rounded-lg p-6 border border-slate-300/40 hover:shadow-xl transition-shadow duration-300">
+          <h2 className="text-2xl font-bold text-[#00AFF3] mb-4">Standing Order</h2>
+          <ul className="space-y-3">
+            {[
+              { label: 'BPR - Standing Order Form', url: 'https://apps.prime.rw/customerportal/files/bpr%20Bank%20-%20STANDING%20ORDER%20FORM.pdf' },
+              { label: 'Salary Deduction Form', url: 'https://apps.prime.rw/customerportal/files/OPS%20FORM%20%202024_0001.pdf' },
+              { label: 'EQUITY - Standing Order Form', url: 'https://apps.prime.rw/customerportal/files/STO%20EQUITY%20FORM%202024_0001.pdf' },
+              { label: 'Other Banks-Standing Order', url: 'https://apps.prime.rw/customerportal/files/STO%20FORM%202024_0001.pdf' },
+            ].map((item) => (
+              <li key={item.label} className="flex items-center justify-between">
+                <span className="text-gray-800">{item.label}</span>
+                <div className="flex items-center space-x-2">
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 bg-white border-2 border-yellow-400 text-gray-700 rounded-md text-sm font-semibold hover:bg-yellow-50 transition-colors duration-200"
+                  >
+                    View
+                  </a>
+                  <a
+                    href={item.url}
+                    download
+                    className="px-3 py-1.5 bg-[#00AFF3] text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors duration-200"
+                  >
+                    Download
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contract Format Column */}
+        <div className="rounded-lg p-6 border border-slate-300/40 hover:shadow-xl transition-shadow duration-300">
+          <h2 className="text-2xl font-bold text-[#00AFF3] mb-4">Contract Format</h2>
+          <ul className="space-y-3">
+            <li className="flex items-center justify-between">
+              <span className="text-gray-800">Ikimina Cyacu</span>
+              <div className="flex items-center space-x-2">
+                <a
+                  href={contractFile}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 bg-white border-2 border-yellow-400 text-gray-700 rounded-md text-sm font-semibold hover:bg-yellow-50 transition-colors duration-200"
+                >
+                  View
+                </a>
+                <a
+                  href={contractFile}
+                  download
+                  className="px-3 py-1.5 bg-[#00AFF3] text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors duration-200"
+                >
+                  Download
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default IkiminaContractFormat;
+
+
+

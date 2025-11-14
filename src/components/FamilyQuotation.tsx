@@ -839,7 +839,7 @@ const FamilyQuotationCalculator: React.FC = () => {
                     <option value="" className="text-black">Select Years</option>
                     {contributionYearsOptions.map((year) => (
                       <option key={year} value={year} className="text-black">
-                        {year} {year === '1' ? 'Year' : 'Years'}
+                        {year}
                       </option>
                     ))}
                   </select>
@@ -955,7 +955,7 @@ const FamilyQuotationCalculator: React.FC = () => {
                 ) : (
                   <>
                     <Download className="w-5 h-5" />
-                    <span>Download Report</span>
+                    <span>Download Quotation</span>
                   </>
                 )}
               </button>

@@ -18,19 +18,19 @@ const News = () => {
   // API call function directly in component
   const fetchNewsData = async (): Promise<NewsArticle[]> => {
     try {
-      console.log("🔄 Starting to fetch news...")
+      //console.log("🔄 Starting to fetch news...")
       const response = await fetchNews()
-      console.log("📰 Raw API response:", response)
-      console.log("📊 Response data length:", response.data?.length || 0)
+      //console.log("📰 Raw API response:", response)
+      //console.log("📊 Response data length:", response.data?.length || 0)
       
       if (!response.data || response.data.length === 0) {
-        console.log("⚠️ No news data found in response")
+        //console.log("⚠️ No news data found in response")
         return []
       }
       
       // For now, show all articles without date filtering (since articles are from future dates)
       const allNews = response.data
-      console.log("📅 All news articles:", allNews.length)
+      //console.log("📅 All news articles:", allNews.length)
       
       // Sort by published date descending (most recent first)
       const sortedNews = [...allNews].sort((a, b) => {
@@ -38,7 +38,7 @@ const News = () => {
       })
       
       const finalNews = sortedNews.slice(0, 3) // Show only 3 most recent articles
-      console.log("✅ Final news to display:", finalNews.length)
+      //console.log("✅ Final news to display:", finalNews.length)
       
       return finalNews
     } catch (error) {
@@ -56,26 +56,26 @@ const News = () => {
     })
 
     newSocket.on('connect', () => {
-      console.log('✅ Connected to Socket.IO server for News')
+      //console.log('✅ Connected to Socket.IO server for News')
     })
 
     newSocket.on('connect_error', (error) => {
-      console.error('❌ Socket.IO connection error for News:', error)
+    //  console.error('❌ Socket.IO connection error for News:', error)
     })
 
     // Listen for real-time updates
     newSocket.on('News_Management_created', (data) => {
-      console.log('🆕 New news article created:', data)
+      //console.log('🆕 New news article created:', data)
       // Refresh news to get the latest data
       fetchNewsData().then(newNews => {
         setNewsArticles(newNews)
         // Show notification or update UI as needed
-        console.log("all newsss",newNews)
+        //console.log("all newsss",newNews)
       })
     })
 
     newSocket.on('News_Management_updated', (data) => {
-      console.log('🔄 News article updated:', data)
+      //console.log('🔄 News article updated:', data)
       // Refresh news to get the latest data
       fetchNewsData().then(newNews => {
         setNewsArticles(newNews)
@@ -84,7 +84,7 @@ const News = () => {
     })
 
     newSocket.on('News_Management_deleted', (data) => {
-      console.log('🗑️ News article deleted:', data)
+      //console.log('🗑️ News article deleted:', data)
       // Refresh news to get the latest data
       fetchNewsData().then(newNews => {
         setNewsArticles(newNews)
@@ -105,18 +105,18 @@ const News = () => {
   useEffect(() => {
     const loadNews = async () => {
       try {
-        console.log("🚀 Loading news component...")
+        //console.log("🚀 Loading news component...")
         setLoading(true)
         setError(null)
         const data = await fetchNewsData()
-        console.log("📋 Setting news articles:", data)
+        //console.log("📋 Setting news articles:", data)
         setNewsArticles(data)
       } catch (err) {
         console.error('💥 Error in loadNews:', err)
         setError(err instanceof Error ? err.message : 'Failed to fetch news')
       } finally {
         setLoading(false)
-        console.log("🏁 Loading finished")
+        //console.log("🏁 Loading finished")
       }
     }
 
@@ -171,7 +171,7 @@ const News = () => {
   }
 
   // Debug logging
-  console.log("🔍 Current state:", { loading, error, newsArticles: newsArticles.length })
+  //console.log("🔍 Current state:", { loading, error, newsArticles: newsArticles.length })
 
   return (
     <section className="py-12 sm:py-16 lg:py-20">

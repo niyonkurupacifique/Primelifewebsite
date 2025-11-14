@@ -4,14 +4,17 @@ import Footer from "../Footer"
 import BenefitsOfGroupLifeInsurance from "../BenefitsOfGroupLife"
 import GroupLifeInsuranceFeatures from "../GroupLifeFeatures"
 import FamilyContractFormat from "../FamilyInsuranceContractFormat"
+import GroupLifeQuotationCalculator from "../GroupLifeQuotation"
+import GroupLifeContractFormat from "../GroupLifeContractFormat"
 const GroupLifeInsurance=()=>{
     return(
         <>
         <Header/>
         <HeroGroupLifeInsurance/>
+        <GroupLifeQuotationCalculator />
         <BenefitsOfGroupLifeInsurance/>
         <GroupLifeInsuranceFeatures/>
-        {/* <FamilyContractFormat/> */}
+        <GroupLifeContractFormat/>
 
 
         <Footer/>

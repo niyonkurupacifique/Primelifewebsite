@@ -112,7 +112,7 @@ const QuarterlyReports: React.FC = () => {
     fetchQuarterlyReports();
 
     // Create socket connection with detailed logging
-    console.log('🔌 Initializing Socket.IO connection for Quarterly Reports...');
+    //console.log('🔌 Initializing Socket.IO connection for Quarterly Reports...');
     const newSocket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
@@ -121,7 +121,7 @@ const QuarterlyReports: React.FC = () => {
 
     // Connection event handlers
     newSocket.on('connect', () => {
-      console.log('✅ Quarterly Reports Socket connected successfully:', newSocket.id);
+      //console.log('✅ Quarterly Reports Socket connected successfully:', newSocket.id);
     });
 
     newSocket.on('connect_error', (error) => {
@@ -129,49 +129,49 @@ const QuarterlyReports: React.FC = () => {
     });
 
     newSocket.on('disconnect', (reason) => {
-      console.log('🔌 Quarterly Reports Socket disconnected:', reason);
+      //console.log('🔌 Quarterly Reports Socket disconnected:', reason);
     });
 
     // Listen for quarterly report events with enhanced logging
     newSocket.on('Quarterly_Report_created', (data) => {
-      console.log('📥 Quarterly_Report_created event received:', data);
+      //console.log('📥 Quarterly_Report_created event received:', data);
       // Refetch all data to get the latest reports
       fetchQuarterlyReports();
     });
 
     newSocket.on('Quarterly_Report_updated', (data) => {
-      console.log('📥 Quarterly_Report_updated event received:', data);
+      //console.log('📥 Quarterly_Report_updated event received:', data);
       // Refetch all data to get the updated reports
       fetchQuarterlyReports();
     });
 
     newSocket.on('Quarterly_Report_deleted', (data) => {
-      console.log('📥 Quarterly_Report_deleted event received:', data);
+      //console.log('📥 Quarterly_Report_deleted event received:', data);
       // Refetch all data to get the current reports
       fetchQuarterlyReports();
     });
 
     // Listen for custom quarterly reports events
     newSocket.on('Quarterly_Reports_queried', (data) => {
-      console.log('�� Quarterly_Reports_queried event received:', data);
+      //console.log('�� Quarterly_Reports_queried event received:', data);
     });
 
     newSocket.on('Quarterly_Reports_searched', (data) => {
-      console.log('📥 Quarterly_Reports_searched event received:', data);
+      //console.log('📥 Quarterly_Reports_searched event received:', data);
     });
 
     newSocket.on('Quarterly_Reports_stats_updated', (data) => {
-      console.log('📥 Quarterly_Reports_stats_updated event received:', data);
+      //console.log('📥 Quarterly_Reports_stats_updated event received:', data);
     });
 
     newSocket.on('Quarterly_Reports_broadcast', (data) => {
-      console.log('📥 Quarterly_Reports_broadcast event received:', data);
+      //console.log('📥 Quarterly_Reports_broadcast event received:', data);
       // You can add a toast notification here if you want
     });
 
     // Listen for any events (debugging)
     newSocket.onAny((eventName, ...args) => {
-      console.log('📡 Quarterly Reports received event:', eventName, args);
+      //console.log('📡 Quarterly Reports received event:', eventName, args);
     });
 
     // Test connection by sending a ping
@@ -184,7 +184,7 @@ const QuarterlyReports: React.FC = () => {
 
     // Cleanup function
     return () => {
-      console.log('🧹 Cleaning up Quarterly Reports socket connection');
+      //console.log('🧹 Cleaning up Quarterly Reports socket connection');
       if (newSocket) {
         newSocket.off('connect');
         newSocket.off('connect_error');

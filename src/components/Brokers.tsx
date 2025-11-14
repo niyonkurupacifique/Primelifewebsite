@@ -31,7 +31,7 @@ const BrokersComponents = () => {
       const json = await res.json()
       const items = Array.isArray(json?.data) ? json.data : []
 
-      console.log("brokersss",items)
+      //console.log("brokersss",items)
 
       const mapped = items.map((item: any) => ({
         id: item.id,
@@ -43,7 +43,7 @@ const BrokersComponents = () => {
       }))
       setAgents(mapped)
       const first = items[0]
-      console.log(first)
+      //console.log(first)
     } catch (e) {
       console.error('Failed to load sales agents', e)
       setAgents([])

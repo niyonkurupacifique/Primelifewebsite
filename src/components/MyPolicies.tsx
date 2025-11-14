@@ -36,7 +36,7 @@ const MyPolicies: React.FC = () => {
         scriptElement.textContent = script;
         iframeDoc.head.appendChild(scriptElement);
       } catch (error) {
-        console.log('Cross-origin restrictions prevent script injection');
+        //console.log('Cross-origin restrictions prevent script injection');
       }
     }
   };

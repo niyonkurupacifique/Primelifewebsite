@@ -112,7 +112,7 @@ const SignupForm = ({ onSignupSuccess, onBackToChoice }: {
           successMessage: responseData.successMessage || 'Registration successful!'
         }))
 
-        console.log('Registration successful:', responseData)
+        //console.log('Registration successful:', responseData)
         onSignupSuccess(responseData)
       } else if (response.status === 409) {
         // National ID already in use

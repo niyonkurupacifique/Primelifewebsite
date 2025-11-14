@@ -69,7 +69,7 @@ const Testimonials = () => {
     });
 
     newSocket.on('connect', () => {
-      console.log('✅ Connected to Socket.IO server');
+      //console.log('✅ Connected to Socket.IO server');
     });
 
     newSocket.on('connect_error', (error) => {
@@ -78,7 +78,7 @@ const Testimonials = () => {
 
     // Listen for real-time updates
     newSocket.on('What_Our_Clients_Say_created', (data) => {
-      console.log('🆕 New testimonial created:', data);
+      //console.log('🆕 New testimonial created:', data);
       // Refresh testimonials to get the latest data
       fetchTestimonials().then(newTestimonials => {
         setTestimonials(newTestimonials);
@@ -87,7 +87,7 @@ const Testimonials = () => {
     });
 
     newSocket.on('What_Our_Clients_Say_updated', (data) => {
-      console.log('🔄 Testimonial updated:', data);
+      //console.log('🔄 Testimonial updated:', data);
       // Refresh testimonials to get the latest data
       fetchTestimonials().then(newTestimonials => {
         setTestimonials(newTestimonials);
@@ -96,7 +96,7 @@ const Testimonials = () => {
     });
 
     newSocket.on('What_Our_Clients_Say_deleted', (data) => {
-      console.log('🗑️ Testimonial deleted:', data);
+      //console.log('🗑️ Testimonial deleted:', data);
       // Remove the deleted testimonial from state
       setTestimonials(prev => prev.filter(testimonial => testimonial.id !== data.data.id));
       // Show notification or update UI as needed

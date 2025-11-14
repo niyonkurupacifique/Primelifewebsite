@@ -17,7 +17,7 @@ const valuesModalSlice = createSlice({
     },
     OpenValuesModal(state) {
       state.showValuesModal = true;
-      console.log("showValuesModal is true ")
+      //console.log("showValuesModal is true ")
     },
     CloseValuesModal(state) {
       state.showValuesModal = false;

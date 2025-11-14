@@ -48,11 +48,11 @@ const LoanQuotationCalculator: React.FC = () => {
   // ✅ Form data from loanQuotationFormFieldsReducer (state.formdata)
   const yearOfBirth = useAppSelector((state) => state.formdata.yearOfBirth);
   const loanType = useAppSelector((state) => state.formdata.loanType);
-  console.log("loantype is",loanType)
+  //console.log("loantype is",loanType)
   const loanPeriod = useAppSelector((state) => state.formdata.loanPeriod);
   const loanAmount = useAppSelector((state) => state.formdata.loanAmount);
   const premiumFrequency = useAppSelector((state) => state.formdata.premiumFrequency);
-  console.log("premium frequency is",premiumFrequency)
+  //console.log("premium frequency is",premiumFrequency)
   const isJoint = useAppSelector((state) => state.formdata.isJoint);
   const coverRetrenchment = useAppSelector((state) => state.formdata.coverRetrenchment);
   const interestRate = useAppSelector((state) => state.formdata.interestRate);
@@ -66,7 +66,7 @@ const LoanQuotationCalculator: React.FC = () => {
   const covers = useAppSelector(state => state.Results.covers);
 
    const [incompleteFields, setIncompleteFields] = useState<string[]>([]);
-   console.log("incompleteFields",incompleteFields)
+   //console.log("incompleteFields",incompleteFields)
 
   useEffect(()=>{
       dispatch(setLoanPeriod(0))
@@ -132,13 +132,13 @@ const LoanQuotationCalculator: React.FC = () => {
     try {
         const result=await fetch(`https://apps.prime.rw/customerbackend/api/loan-protection?yearOfBirth=${yearOfBirth}&loanPeriod=${loanPeriod}&premiumFrequency=${premiumFrequency}&loanAmount=${loanAmount}&loanType=${loanType}&isJoint=${isJoint}&coverRetrenchment=${coverRetrenchment}`)
         const result2=await result.json()
-        // console.log("rate per mille from api:",result2)
+        // //console.log("rate per mille from api:",result2)
         dispatch(SetNetPremium(result2.netPremium))
         dispatch(SetAdministrationFees(result2.administrationFees))
         dispatch(SetTotalPremiumSingleBorrower(result2.totalPremiumSingleBorrower))
         dispatch(SetTotalPremiumJointBorrowers(result2.totalPremiumJointBorrowers))
         dispatch(SetRetrenchmentPremium(result2.retrenchmentPremium))
-        // console.log("covers is",result2.covers)
+        // //console.log("covers is",result2.covers)
         if(Array.isArray(result2.covers)){
        dispatch(setCovers(result2.covers)) 
         //  setCoverAvailable(true)
@@ -149,7 +149,7 @@ const LoanQuotationCalculator: React.FC = () => {
         }
           
         } catch (error) {
-          console.error(error)
+         // console.error(error)
         }
 
   }

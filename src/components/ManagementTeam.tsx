@@ -132,7 +132,7 @@ const ManagementTeam = () => {
       }
       
       const data = await response.json()
-      console.log("data fetched is",data)
+      //console.log("data fetched is",data)
       
       // Sort team members by position hierarchy
       const sortedMembers = (data.data || []).sort((a: TeamMember, b: TeamMember) => {
@@ -199,7 +199,7 @@ const ManagementTeam = () => {
     fetchTeamMembers()
 
     // Create socket connection with detailed logging
-    console.log('🔌 Initializing Socket.IO connection...')
+    //console.log('🔌 Initializing Socket.IO connection...')
     const socket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
@@ -208,7 +208,7 @@ const ManagementTeam = () => {
 
     // Connection event handlers
     socket.on('connect', () => {
-      console.log('✅ Socket connected successfully:', socket.id)
+      //console.log('✅ Socket connected successfully:', socket.id)
     })
 
     socket.on('connect_error', (error) => {
@@ -216,28 +216,28 @@ const ManagementTeam = () => {
     })
 
     socket.on('disconnect', (reason) => {
-      console.log('🔌 Socket disconnected:', reason)
+      //console.log('🔌 Socket disconnected:', reason)
     })
 
     // Listen for board member events with enhanced logging
     socket.on('Management_Team_created', (data) => {
-      console.log('📥 Management_Team_created event received:', data)
+      //console.log('📥 Management_Team_created event received:', data)
       fetchTeamMembers() // Refetch all data
     })
 
     socket.on('Management_Team_updated', (data) => {
-      console.log('📥 Management_Team_updated event received:', data)
+      //console.log('📥 Management_Team_updated event received:', data)
       fetchTeamMembers() // Refetch all data
     })
 
     socket.on('Management_Team_deleted', (data) => {
-      console.log('📥 Management_Team_deleted deleted event received:', data)
+      //console.log('📥 Management_Team_deleted deleted event received:', data)
       fetchTeamMembers() // Refetch all data
     })
 
     // Listen for any events (debugging)
     socket.onAny((eventName, ...args) => {
-      console.log('📡 Received event:', eventName, args)
+      //console.log('📡 Received event:', eventName, args)
     })
 
     // Test connection by sending a ping
@@ -247,7 +247,7 @@ const ManagementTeam = () => {
 
     // Cleanup function
     return () => {
-      console.log('🧹 Cleaning up socket connection')
+      //console.log('🧹 Cleaning up socket connection')
       socket.off('connect')
       socket.off('connect_error')
       socket.off('disconnect')
@@ -346,7 +346,7 @@ const ManagementTeam = () => {
         </div>
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-primary leading-tight max-w-3xl mx-auto">
-            Meet the Prime Insurance team:
+            Meet the Prime Life Insurance team:
           </h2>
           <h2 className="text-4xl lg:text-5xl font-bold text-primary leading-tight max-w-3xl mx-auto">
             Management Team

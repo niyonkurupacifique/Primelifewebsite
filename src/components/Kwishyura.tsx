@@ -104,7 +104,7 @@ const Kwishyura = () => {
         setMessage({ type: 'error', text: `${result2.status} - Failed to process payment. Please contact Prime Life for support.` });
       }
     } catch (error) {
-      console.error('payment error:', error);
+      //console.error('payment error:', error);
       setMessage({ type: 'error', text: 'Failed to process payment. There was an error during payment processing. Please try again.' });
     } finally {
       setIsLoading(false);
@@ -145,7 +145,7 @@ const Kwishyura = () => {
 
       try {
 
-        const response = await fetch('https://apps.prime.rw/customerbackendtest/api/proposal/education', {
+        const response = await fetch('https://apps.prime.rw/customerbackend/api/proposal/education', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -201,7 +201,7 @@ const Kwishyura = () => {
 
           const textResponse = await response.text();
           setProposalNumber(textResponse);
-          console.log("Proposal Number:", textResponse);
+          //console.log("Proposal Number:", textResponse);
 
           // Call MoMo payment after successful proposal registration
           setMessage({ type: 'success', text: 'Proposal registered successfully! Now processing MoMo payment...' });
@@ -270,7 +270,7 @@ const Kwishyura = () => {
 
       try {
 
-        const response = await fetch('https://apps.prime.rw/customerbackendtest/api/proposal/employee', {
+        const response = await fetch('https://apps.prime.rw/customerbackend/api/proposal/employee', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -329,7 +329,7 @@ const Kwishyura = () => {
 
           const textResponse = await response.text();
           setProposalNumber(textResponse);
-          console.log("Proposal Number:", textResponse);
+          //console.log("Proposal Number:", textResponse);
 
           // Call MoMo payment after successful proposal registration
           setMessage({ type: 'success', text: 'Proposal registered successfully! Now processing MoMo payment...' });
@@ -392,7 +392,7 @@ const Kwishyura = () => {
       setIsLoading(true);
 
       try {
-        const response = await fetch('https://apps.prime.rw/customerbackendtest/api/proposal/family', {
+        const response = await fetch('https://apps.prime.rw/customerbackend/api/proposal/family', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -432,7 +432,7 @@ const Kwishyura = () => {
           const textResponse = await response.text();
           const jsonResponse = JSON.parse(textResponse);
           setProposalNumber(jsonResponse.proposalNumber);
-          console.log("Proposal Number:", jsonResponse.proposalNumber);
+          //console.log("Proposal Number:", jsonResponse.proposalNumber);
 
           // Call MoMo payment after successful proposal registration
           setMessage({ type: 'success', text: 'Proposal registered successfully! Now processing MoMo payment...' });
@@ -498,7 +498,7 @@ const Kwishyura = () => {
       setIsLoading(true);
 
       try {
-        const response = await fetch('https://apps.prime.rw/customerbackendtest/api/proposal/family', {
+        const response = await fetch('https://apps.prime.rw/customerbackend/api/proposal/family', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -548,7 +548,7 @@ const Kwishyura = () => {
           const textResponse = await response.text();
           const jsonResponse = JSON.parse(textResponse);
           setProposalNumber(jsonResponse.proposalNumber);
-          console.log("Proposal Number:", jsonResponse.proposalNumber);
+          //console.log("Proposal Number:", jsonResponse.proposalNumber);
 
           // Call MoMo payment after successful proposal registration
           setMessage({ type: 'success', text: 'Proposal registered successfully! Now processing MoMo payment...' });
@@ -612,7 +612,7 @@ const Kwishyura = () => {
       setIsLoading(true);
 
       try {
-        const response = await fetch('https://apps.prime.rw/customerbackendtest/api/proposal/saving', {
+        const response = await fetch('https://apps.prime.rw/customerbackend/api/proposal/saving', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -651,7 +651,7 @@ const Kwishyura = () => {
           const textResponse = await response.text();
           const jsonResponse = JSON.parse(textResponse);
           setProposalNumber(jsonResponse.proposalNumber);
-          console.log("Proposal Number:", jsonResponse.proposalNumber);
+          //console.log("Proposal Number:", jsonResponse.proposalNumber);
 
           // Call MoMo payment after successful proposal registration
           setMessage({ type: 'success', text: 'Proposal registered successfully! Now processing MoMo payment...' });
@@ -663,7 +663,7 @@ const Kwishyura = () => {
 
           try {
             const errorResponse = await response.text();
-            console.log("Error response:", errorResponse);
+            //console.log("Error response:", errorResponse);
             const errorData = JSON.parse(errorResponse);
             
             // Check if there's an errorMessage in the response
@@ -683,14 +683,14 @@ const Kwishyura = () => {
             }
           } catch (parseError) {
             // If parsing fails, show generic error
-            console.error('Error parsing response:', parseError);
+           // console.error('Error parsing response:', parseError);
             setMessage({ type: 'error', text: 'Failed to register proposal. Please contact Prime Life Insurance for support.' });
           }
         }
 
       }
       catch (error) {
-        console.error('payment error:', error);
+       // console.error('payment error:', error);
         setMessage({ type: 'error', text: 'Failed to register proposal. There was an error during registering proposal. Please try again.' });
       } finally {
         setIsLoading(false);
@@ -721,7 +721,7 @@ const Kwishyura = () => {
         HandleRequestIntegoPayment()
         break;
       default:
-        console.log("invalid product")
+        //console.log("invalid product")
 
     }
   }

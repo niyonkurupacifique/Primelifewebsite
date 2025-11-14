@@ -53,7 +53,7 @@ const Header: React.FC = () => {
               </button> */}
               <span className="text-gray-400">-</span>
               <button 
-                onClick={() => window.open('https://staging.prime.rw/Home', '_blank')}
+                onClick={() => window.open('https://prime.rw/primeinsurance', '_blank')}
                 className="bg-white text-[#f9d308] px-4 py-1 rounded-sm font-medium text-sm hover:bg-blue-600 transition-colors cursor-pointer"
               >
                 Prime General
@@ -84,7 +84,7 @@ const Header: React.FC = () => {
                 <a
                  
                   // onClick={(e) => handleNavigation('/Home', e)}
-                  onClick={() => window.open('https://staging.prime.rw', '_self')}
+                  onClick={() => window.open('https://prime.rw/', '_self')}
                   className="main-menu__link"
                 >
                   Home
@@ -124,7 +124,7 @@ const Header: React.FC = () => {
                  
                   
                   <li>
-                    <a  className="main-menu__submenu-link">Fees Structure</a>
+                    <a onClick={()=>{router.push('/allproducts')}} className="main-menu__submenu-link cursor-pointer">Fees Structure</a>
                   </li>
                
                   <li>
@@ -195,7 +195,7 @@ const Header: React.FC = () => {
                     <a   onClick={()=>{router.push('/consumerprotectionreport')}} className="main-menu__submenu-link  cursor-pointer">Consumer Protection Reports</a>
                   </li>
                   <li>
-                    <a  onClick={()=>{router.push('/allproduct')}}  className="main-menu__submenu-link cursor pointer">Fees Structure</a>
+                    <a  onClick={()=>{router.push('/allproducts')}}  className="main-menu__submenu-link cursor pointer">Fees Structure</a>
                   </li>
                 </ul>
               </div>
@@ -218,6 +218,9 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <a  className="main-menu__submenu-link">Tenders</a>
+                  </li>
+                   <li>
+                    <a onClick={()=>{router.push('/bankaccounts')}} className="main-menu__submenu-link cursor-pointer">Bank Accounts</a>
                   </li>
                 </ul>
               </div>
@@ -277,7 +280,7 @@ const Header: React.FC = () => {
                   <a
                     href="#"
                     // onClick={(e) => handleNavigation('/Home', e)}
-                     onClick={() => window.open('https://staging.prime.rw', '_self')}
+                     onClick={() => window.open('https://prime.rw/', '_self')}
                     className="block py-3 px-2 text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-md font-medium transition-colors"
                   >
                     Home
@@ -489,7 +492,7 @@ const Header: React.FC = () => {
                         </button>
                       </li>
                       <li>
-                        <a onClick={()=>{router.push('/allproduct')}} className="block py-2 cursor-pointer px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                        <a onClick={()=>{router.push('/allproducts')}} className="block py-2 cursor-pointer px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
                           Fees Structure
                         </a>
                       </li>
@@ -532,6 +535,11 @@ const Header: React.FC = () => {
                       <li>
                         <a href="#tenders" className="block py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
                           Tenders
+                        </a>
+                      </li>
+                       <li>
+                        <a onClick={()=>{router.push('/bankaccounts')}} className="block cursor-pointer py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                          Bank Accounts
                         </a>
                       </li>
                     </ul>
