@@ -330,14 +330,14 @@ const [CycleArray, setCycleArray] = useState([
     doc.setFont('helvetica', 'bold'); // Bold font weight
     doc.setFontSize(13);
     doc.setTextColor(0, 0, 0);
-    doc.text(`Endowment amount after differed period: `, 15, currentY)
+    doc.text(`Endowment amount during deferred period: `, 15, currentY)
     doc.text(`${Math.round(Endowmentamountafterdeferredperiod).toLocaleString('en-US')} RWF`, 120, currentY);
     currentY += 6;
   
     doc.setFont('helvetica', 'bold'); // Bold font weight
     doc.setFontSize(13);
     doc.setTextColor(0, 0, 0);
-    doc.text(`Endowment amount during deferred period: `, 15, currentY)
+    doc.text(`:Endowment amount after differed period `, 15, currentY)
     doc.text(`${Math.round(Endowmentamountduringdeferredperiod).toLocaleString('en-US')} RWF`, 120, currentY);
     currentY += 6;
   

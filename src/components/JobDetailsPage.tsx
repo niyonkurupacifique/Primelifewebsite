@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useState, type JSX } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { ArrowLeft, MapPin, Calendar, Clock, Users, Mail, FileText, CheckCircle, AlertCircle, Building, Award, Target } from 'lucide-react'
+import { ArrowLeft, MapPin, Calendar, Users, Mail, FileText, CheckCircle, AlertCircle, Building, Award, Target } from 'lucide-react'
 import { io, Socket } from 'socket.io-client'
 import Header from './Header'
 import Footer from './Footer'
@@ -39,7 +39,6 @@ interface APIResponse {
   meta: Record<string, any>;
 }
 
-// Type definitions for transformed job data
 interface TransformedJob {
   id: number;
   documentId: string;
@@ -89,15 +88,12 @@ const JobDetailsPage: React.FC = () => {
       }
       
       const result: APIResponse = await response.json()
-      
-      // Find the specific job by documentId
       const jobData = result.data.find(job => job.documentId === documentId)
       
       if (!jobData) {
         throw new Error('Job not found')
       }
       
-      // Transform API data to match component expectations
       const transformedJob: TransformedJob = {
         id: jobData.id,
         documentId: jobData.documentId,
@@ -116,7 +112,6 @@ const JobDetailsPage: React.FC = () => {
       setJob(transformedJob)
       setError(null)
     } catch (err) {
-      //console.error('Error fetching job data:', err)
       setError('Failed to load job details. Please try again later.')
     } finally {
       setLoading(false)
@@ -124,109 +119,46 @@ const JobDetailsPage: React.FC = () => {
   }
 
   useEffect(() => {
-    // Initial fetch
     fetchJobData()
 
-    // Create socket connection with detailed logging
-    //console.log('🔌 Initializing Socket.IO connection for Job Management...')
     const newSocket: Socket = io('https://primelife.prime.rw:8080', {
       transports: ['websocket', 'polling'],
       timeout: 5000,
-      forceNew: true, // Force a new connection
+      forceNew: true,
     })
 
-    // Connection event handlers
-    newSocket.on('connect', () => {
-      //console.log('✅ Job Management Socket connected successfully:', newSocket.id)
-    })
-
-    newSocket.on('connect_error', (error) => {
-      console.error('❌ Job Management Socket connection error:', error)
-    })
-
-    newSocket.on('disconnect', (reason) => {
-      //console.log('🔌 Job Management Socket disconnected:', reason)
-    })
-
-    // Listen for job management events with enhanced logging
     newSocket.on('Job_created', (data) => {
-      //console.log('📥 Job_created event received:', data)
-      // If this is the job we're currently viewing, refresh the data
       if (data.data && data.data.documentId === documentId) {
-        //console.log('🔄 Refreshing job data due to creation event')
         fetchJobData()
       }
     })
 
     newSocket.on('Job_updated', (data) => {
-      //console.log('📥 Job_updated event received:', data)
-      // If this is the job we're currently viewing, refresh the data
       if (data.data && data.data.documentId === documentId) {
-        //console.log('🔄 Refreshing job data due to update event')
         fetchJobData()
       }
     })
 
     newSocket.on('Job_deleted', (data) => {
-      //console.log('📥 Job_deleted event received:', data)
-      // If this is the job we're currently viewing, show error
       if (data.data && data.data.documentId === documentId) {
-        //console.log('🗑️ Current job was deleted')
         setError('This job position has been removed and is no longer available.')
         setJob(null)
       }
     })
 
-    // Listen for custom job management events
-    newSocket.on('Job_Management_queried', (data) => {
-      //console.log('📥 Job_Management_queried event received:', data)
-    })
-
-    newSocket.on('Job_Management_searched', (data) => {
-      //console.log('📥 Job_Management_searched event received:', data)
-    })
-
-    newSocket.on('Job_Management_stats_updated', (data) => {
-      //console.log('📥 Job_Management_stats_updated event received:', data)
-    })
-
-    newSocket.on('Job_Management_broadcast', (data) => {
-      //console.log('📥 Job_Management_broadcast event received:', data)
-      // You can add a toast notification here if you want
-    })
-
-    // Listen for any events (debugging)
-    newSocket.onAny((eventName, ...args) => {
-      //console.log('📡 Job Management received event:', eventName, args)
-    })
-
-    // Test connection by sending a ping
-    newSocket.on('connect', () => {
-      newSocket.emit('ping', 'Hello from Job Management frontend!')
-    })
-
-    // Set socket in state
     setSocket(newSocket)
 
-    // Cleanup function
     return () => {
-      //console.log('🧹 Cleaning up Job Management socket connection')
       if (newSocket) {
-        newSocket.off('connect')
-        newSocket.off('connect_error')
-        newSocket.off('disconnect')
-        newSocket.off('Job_created')
-        newSocket.off('Job_updated')
-        newSocket.off('Job_deleted')
-        newSocket.off('Job_Management_queried')
-        newSocket.off('Job_Management_searched')
-        newSocket.off('Job_Management_stats_updated')
-        newSocket.off('Job_Management_broadcast')
-        newSocket.offAny()
         newSocket.disconnect()
       }
     }
-  }, [documentId]) // Add documentId as dependency
+  }, [documentId])
+
+  const openApplicationForm = () => {
+    // Navigate to application page with job details
+    router.push(`/application/${documentId}`)
+  }
 
   if (loading) {
     return (
@@ -266,7 +198,7 @@ const JobDetailsPage: React.FC = () => {
     )
   }
 
-  const getStatusBadge = (status: string): JSX.Element => {
+  const getStatusBadge = (status: string) => {
     if (status === 'open') {
       return (
         <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
@@ -277,14 +209,13 @@ const JobDetailsPage: React.FC = () => {
     } else {
       return (
         <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-          <Clock className="h-4 w-4 mr-1" />
+          <AlertCircle className="h-4 w-4 mr-1" />
           Application Closed
         </span>
       )
     }
   }
 
-  // Extract email from application procedure text
   const extractEmail = (text: string): string => {
     const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g
     const emails = text.match(emailRegex)
@@ -296,7 +227,6 @@ const JobDetailsPage: React.FC = () => {
       <Header />
       
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Back Button */}
         <div className="mb-6" data-aos="fade-right">
           <button
             onClick={() => router.push('/careers')}
@@ -307,8 +237,7 @@ const JobDetailsPage: React.FC = () => {
           </button>
         </div>
 
-        {/* Job Header */}
-        <div className=" rounded-lg  shadow-md p-8 mb-8" data-aos="fade-up">
+        <div className="rounded-lg shadow-md p-8 mb-8" data-aos="fade-up">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
             <div className="flex-1">
               <h1 className="text-3xl font-bold text-gray-900 mb-4">{job.title}</h1>
@@ -329,10 +258,20 @@ const JobDetailsPage: React.FC = () => {
               {getStatusBadge(job.status)}
             </div>
           </div>
+          
+          {job.status === 'open' && (
+            <div className="mt-6">
+              <button
+                onClick={openApplicationForm}
+                className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-semibold"
+              >
+                Apply for this Position
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* Company Profile */}
-        <div className=" rounded-lg shadow-md p-8 mb-8" data-aos="fade-up">
+        <div className="rounded-lg shadow-md p-8 mb-8" data-aos="fade-up">
           <div className="flex items-center mb-4">
             <Building className="h-6 w-6 text-blue-600 mr-3" />
             <h2 className="text-2xl font-bold text-gray-900">Company Profile</h2>
@@ -340,8 +279,7 @@ const JobDetailsPage: React.FC = () => {
           <p className="text-gray-700 leading-relaxed">{job.companyProfile}</p>
         </div>
 
-        {/* Requirements and Skills */}
-        <div className=" rounded-lg shadow-md p-8 mb-8" data-aos="fade-up">
+        <div className="rounded-lg shadow-md p-8 mb-8" data-aos="fade-up">
           <div className="flex items-center mb-6">
             <Award className="h-6 w-6 text-green-600 mr-3" />
             <h2 className="text-2xl font-bold text-gray-900">Requirements and Skills</h2>
@@ -356,9 +294,8 @@ const JobDetailsPage: React.FC = () => {
           </ul>
         </div>
 
-        {/* Job Summary */}
         {job.jobSummary.length > 0 && (
-          <div className=" rounded-lg shadow-md p-8 mb-8" data-aos="fade-up">
+          <div className="rounded-lg shadow-md p-8 mb-8" data-aos="fade-up">
             <div className="flex items-center mb-6">
               <Target className="h-6 w-6 text-purple-600 mr-3" />
               <h2 className="text-2xl font-bold text-gray-900">Job Summary</h2>
@@ -374,8 +311,7 @@ const JobDetailsPage: React.FC = () => {
           </div>
         )}
 
-        {/* Application Procedure */}
-        <div className=" rounded-lg shadow-md p-8 mb-8" data-aos="fade-up">
+        <div className="rounded-lg shadow-md p-8 mb-8" data-aos="fade-up">
           <div className="flex items-center mb-6">
             <FileText className="h-6 w-6 text-orange-600 mr-3" />
             <h2 className="text-2xl font-bold text-gray-900">Application Procedure</h2>
@@ -398,15 +334,10 @@ const JobDetailsPage: React.FC = () => {
           </div>
         </div>
 
-       
-
         {job.status === 'closed' && (
           <div className="bg-gray-100 rounded-lg shadow-lg p-8 text-center" data-aos="fade-up">
             <AlertCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Application Closed</h2>
-            {/* <p className="text-gray-600 mb-6">
-              The application deadline for this position has passed. Check back for similar opportunities.
-            </p> */}
             <button
               onClick={() => router.push('/careers')}
               className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
