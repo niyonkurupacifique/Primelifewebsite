@@ -123,10 +123,16 @@ const Header: React.FC = () => {
                   </li>
                  
                   
-                  <li>
-                    <a onClick={()=>{router.push('/allproducts')}} className="main-menu__submenu-link cursor-pointer">Fees Structure</a>
+                  {/* <li className="has-submenu">
+                    <a className="main-menu__submenu-link has-children">
+                      Fees Structure
+                    </a>
+                    <ul className="main-menu__submenu-nested">
+                      <li><a onClick={() => window.open('/Fees_to_publish_English_Version.pdf', '_blank')} className="main-menu__submenu-link cursor-pointer">Fees (English)</a></li>
+                      <li><a onClick={() => window.open('/Fees_to_publish_French_Version.pdf', '_blank')} className="main-menu__submenu-link cursor-pointer">Fees (French)</a></li>
+                    </ul>
                   </li>
-               
+                */}
                   <li>
                     <a   onClick={()=>{router.push('/customercharter')}} className="main-menu__submenu-link cursor-pointer">Customer Charter</a>
                   </li>
@@ -194,8 +200,14 @@ const Header: React.FC = () => {
                   <li>
                     <a   onClick={()=>{router.push('/consumerprotectionreport')}} className="main-menu__submenu-link  cursor-pointer">Consumer Protection Reports</a>
                   </li>
-                  <li>
-                    <a  onClick={()=>{router.push('/allproducts')}}  className="main-menu__submenu-link cursor pointer">Fees Structure</a>
+                  <li className="has-submenu">
+                    <a className="main-menu__submenu-link has-children">
+                      Fees Structure
+                    </a>
+                    <ul className="main-menu__submenu-nested">
+                      <li><a onClick={() => window.open('/Fees_to_publish_English_Version.pdf', '_blank')} className="main-menu__submenu-link cursor-pointer">Fees (English)</a></li>
+                      <li><a onClick={() => window.open('/Fees_to_publish_French_Version.pdf', '_blank')} className="main-menu__submenu-link cursor-pointer">Fees (French)</a></li>
+                    </ul>
                   </li>
                 </ul>
               </div>
@@ -492,9 +504,33 @@ const Header: React.FC = () => {
                         </button>
                       </li>
                       <li>
-                        <a onClick={()=>{router.push('/allproducts')}} className="block py-2 cursor-pointer px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors">
+                        <button
+                          className={`flex items-center justify-between w-full py-2 px-2 text-gray-600 hover:text-blue-500 hover:bg-blue-50 rounded-md text-sm transition-colors ${
+                            nestedDropdown === 'fees' ? 'text-blue-500 bg-blue-50' : ''
+                          }`}
+                          onClick={() => toggleNestedDropdown('fees')}
+                        >
                           Fees Structure
-                        </a>
+                          <ChevronRight className={`w-3 h-3 transition-transform duration-200 ${
+                            nestedDropdown === 'fees' ? 'rotate-90' : ''
+                          }`} />
+                        </button>
+                        <div className={`overflow-hidden transition-all duration-300 ${
+                          nestedDropdown === 'fees' ? 'max-h-32 mt-1' : 'max-h-0'
+                        }`}>
+                          <ul className="ml-4 space-y-1 border-l border-gray-200 pl-2">
+                            <li>
+                              <button onClick={() => window.open('/Fees_to_publish_English_Version.pdf', '_blank')} className="block w-full text-left py-1 px-2 text-gray-500 hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors cursor-pointer">
+                                Fees (English)
+                              </button>
+                            </li>
+                            <li>
+                              <button onClick={() => window.open('/Fees_to_publish_French_Version.pdf', '_blank')} className="block w-full text-left py-1 px-2 text-gray-500 hover:text-blue-500 hover:bg-blue-50 rounded text-xs transition-colors cursor-pointer">
+                                Fees (French)
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
                       </li>
                     </ul>
                   </div>

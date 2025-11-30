@@ -219,7 +219,7 @@ const JobDetailsPage: React.FC = () => {
   const extractEmail = (text: string): string => {
     const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g
     const emails = text.match(emailRegex)
-    return emails ? emails[0] : 'info@prime.rw'
+    return emails ? emails[0] : 'hrmlife@prime.rw'
   }
 
   return (
@@ -259,7 +259,7 @@ const JobDetailsPage: React.FC = () => {
             </div>
           </div>
           
-          {job.status === 'open' && (
+          {/* {job.status === 'open' && (
             <div className="mt-6">
               <button
                 onClick={openApplicationForm}
@@ -268,7 +268,7 @@ const JobDetailsPage: React.FC = () => {
                 Apply for this Position
               </button>
             </div>
-          )}
+          )} */}
         </div>
 
         <div className="rounded-lg shadow-md p-8 mb-8" data-aos="fade-up">

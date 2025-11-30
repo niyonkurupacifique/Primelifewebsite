@@ -20,11 +20,11 @@ const HistorySection = () => {
       description: "2014 – Owned by Greenoaks Global Holdings\n\n 2017 – Rwanda Mountain Tea & SP Aviation became major shareholders\n\n 2023 – FINAFRICA acquired majority ownership"
     },
 
-    {
-      year: "2017",
-      title: "Major Shareholders",
-      description: "FINAFRICA and SP Aviation"
-    },
+    // {
+    //   year: "2017",
+    //   title: "Major Shareholders",
+    //   description: "FINAFRICA and SP Aviation"
+    // },
     // {
     //   year: "2023",
     //   title: "Current Era",

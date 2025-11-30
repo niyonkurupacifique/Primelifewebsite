@@ -186,7 +186,7 @@ const [CycleArray, setCycleArray] = useState([
     
     // Add title
     // Add title with higher contrast
-    const titleText = 'EDUCATION INSURANCE QUOTATION ';
+    const titleText = 'EDUCATION INSURANCE QUOTATION';
     const titleX = doc.internal.pageSize.getWidth() / 2;
     const titleY = 48;
     doc.setFontSize(10); // Increased font size (adjust as needed)
@@ -337,7 +337,7 @@ const [CycleArray, setCycleArray] = useState([
     doc.setFont('helvetica', 'bold'); // Bold font weight
     doc.setFontSize(13);
     doc.setTextColor(0, 0, 0);
-    doc.text(`:Endowment amount after differed period `, 15, currentY)
+    doc.text(`Endowment amount after differed period: `, 15, currentY)
     doc.text(`${Math.round(Endowmentamountduringdeferredperiod).toLocaleString('en-US')} RWF`, 120, currentY);
     currentY += 6;
   
